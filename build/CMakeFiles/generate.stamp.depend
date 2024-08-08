@@ -1,0 +1,63 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeCXXInformation.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeDependentOption.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Compiler/MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Compiler/MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Compiler/MSVC.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/FindOpenGL.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/FindThreads.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows-Initialize.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake
+C:/Program Files/CMake/share/cmake-3.29/Modules/SelectLibraryConfigurations.cmake
+E:/CGcourse/CGcourse/Exercise4-kaifazhong/CMakeLists.txt
+E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/3.29.1/CMakeCCompiler.cmake
+E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/3.29.1/CMakeCXXCompiler.cmake
+E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/3.29.1/CMakeRCCompiler.cmake
+E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/3.29.1/CMakeSystem.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/assimp/assimpConfig.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/assimp/assimpConfigVersion.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/assimp/assimpTargets-debug.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/assimp/assimpTargets-release.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/assimp/assimpTargets.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/cimg/CImgConfig.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glew/CopyImportedTargetProperties.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glew/glew-config.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glew/glew-targets-debug.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glew/glew-targets-release.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glew/glew-targets.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glew/vcpkg-cmake-wrapper.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glfw3/glfw3Config.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glfw3/glfw3ConfigVersion.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glfw3/glfw3Targets-debug.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glfw3/glfw3Targets-release.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glfw3/glfw3Targets.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glm/glmConfig-debug.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glm/glmConfig-release.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glm/glmConfig.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/glm/glmConfigVersion.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/pugixml/pugixml-config-version.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/pugixml/pugixml-config.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/pugixml/pugixml-targets-debug.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/pugixml/pugixml-targets-release.cmake
+E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/share/pugixml/pugixml-targets.cmake
+E:/CGcourse/CGcourse/vcpkg/scripts/buildsystems/vcpkg.cmake

@@ -1,0 +1,10 @@
+^E:\CGCOURSE\CGCOURSE\EXERCISE4-KAIFAZHONG\BUILD\CMAKEFILES\7BDAA063F9FFD85B85EA90A243B09B8F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/exercise.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

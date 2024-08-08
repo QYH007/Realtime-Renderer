@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6F8859EB-8300-3FD1-9C41-00A11F9D8C70}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <VcpkgEnabled>false</VcpkgEnabled>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>exercise</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="do_not_import_user.props" Condition="exists('do_not_import_user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">exercise.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">exercise</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">exercise.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">exercise</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">exercise.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">exercise</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">exercise.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">exercise</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file E:/CGcourse/CGcourse/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/Debug/exercise.exe -installedDir E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/debug/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\debug\lib\glm.lib;imgui\Debug\imgui.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\debug\lib\assimp-vc143-mtd.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\debug\lib\glew32d.lib;opengl32.lib;glu32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\debug\lib\glfw3dll.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\debug\lib\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/Debug/exercise.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/Debug/exercise.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file E:/CGcourse/CGcourse/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/Release/exercise.exe -installedDir E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glm.lib;imgui\Release\imgui.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\assimp-vc143-mt.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glew32.lib;opengl32.lib;glu32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glfw3dll.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/Release/exercise.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/Release/exercise.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file E:/CGcourse/CGcourse/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/MinSizeRel/exercise.exe -installedDir E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glm.lib;imgui\MinSizeRel\imgui.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\assimp-vc143-mt.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glew32.lib;opengl32.lib;glu32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glfw3dll.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/MinSizeRel/exercise.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/MinSizeRel/exercise.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file E:/CGcourse/CGcourse/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/RelWithDebInfo/exercise.exe -installedDir E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glm.lib;imgui\RelWithDebInfo\imgui.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\assimp-vc143-mt.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glew32.lib;opengl32.lib;glu32.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\glfw3dll.lib;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\lib\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/RelWithDebInfo/exercise.lib</ImportLibrary>
+      <ProgramDataBaseFile>E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/RelWithDebInfo/exercise.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\SelectLibraryConfigurations.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCXXCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeRCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeSystem.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\cimg\CImgConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\CopyImportedTargetProperties.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\vcpkg-cmake-wrapper.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config-version.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets.cmake;E:\CGcourse\CGcourse\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\SelectLibraryConfigurations.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCXXCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeRCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeSystem.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\cimg\CImgConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\CopyImportedTargetProperties.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\vcpkg-cmake-wrapper.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config-version.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets.cmake;E:\CGcourse\CGcourse\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\SelectLibraryConfigurations.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCXXCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeRCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeSystem.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\cimg\CImgConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\CopyImportedTargetProperties.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\vcpkg-cmake-wrapper.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config-version.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets.cmake;E:\CGcourse\CGcourse\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\SelectLibraryConfigurations.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeCXXCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeRCCompiler.cmake;E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\3.29.1\CMakeSystem.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\assimp\assimpTargets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\cimg\CImgConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\CopyImportedTargetProperties.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\glew-targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glew\vcpkg-cmake-wrapper.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3ConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glfw3\glfw3Targets.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfig.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\glm\glmConfigVersion.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config-version.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-config.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-debug.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets-release.cmake;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\share\pugixml\pugixml-targets.cmake;E:\CGcourse\CGcourse\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Camera.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\ComputingShaderProgram.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Cube.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\GLApp.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\GLExample.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Ground.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Mesh.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Model.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\ScreenPlane.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\ShaderProgram.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Shape.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Skybox.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Texture.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Torus.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\ZERO_CHECK.vcxproj">
+      <Project>{C3CBC9FE-B67D-3A64-B82B-6B016A17BF26}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\imgui.vcxproj">
+      <Project>{56FE8E33-AFD5-362A-9AE0-B1A353230764}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,4 +1,4 @@
-# Install script for directory: E:/CGcourse/CGcourse/Exercise4-kaifazhong/imgui
+# Install script for directory: E:/CGcourse/CGcourse/Realtime1.0/imgui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -7,6 +7,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <iostream>
+#include <random>
 
 
 //mouse settings
@@ -76,6 +77,10 @@ namespace cgCourse
 		programForPlane = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Plane");
 		programForPBR = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/PBR");
 		programForSkybox = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Skybox");
+		programForDefer = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Defer");
+		programForDeferLighting = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/DeferLighting");
+		programForSSAO = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAO");
+		programForSSAOBlur = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAOBlur");
 		
 		programForSAT = std::make_shared<ComputingShaderProgram>(std::string(SHADER_DIR) + "/ComputeSAT");
 		programForSAT->bind();
@@ -84,6 +89,7 @@ namespace cgCourse
 
 		lightInit();
 		sceneInit();
+		deferredInit();
 
 		return true;
 	}
@@ -113,19 +119,260 @@ namespace cgCourse
 		lightboxes[0]->setPosition(glm::vec3(animation, 10, -15));
 		lightboxes[1]->setPosition(lights[1].position);
 		gun.setPosition(gun.getPosition()+glm::vec3(0, animation*0.005, 0));
-		
+		for(int i =0;i<manyLightsPositions.size();i++){
+			// manyLightsPositions[i] = manyLightsPositions[i] + manyLightPosition;
+			manyLightsboxes[i]->setPosition(manyLightsPositions[i] + manyLightPosition);
+		}
 		return true;
 	}
 
-	bool GLExample::render()
-	{
-		//***********----------------Control and frame-----------------**********************//
-		currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+	void GLExample::deferredInit(){
+		// configure g-buffer framebuffer
+		// ------------------------------
+		glGenFramebuffers(1, &gBuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
 
-		update();
-		cam.updateCameraData();
+		// position color buffer
+		glGenTextures(1, &gPosition);
+		glBindTexture(GL_TEXTURE_2D, gPosition);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, gPosition, 0);
+
+		// normal color buffer
+		glGenTextures(1, &gNormal);
+		glBindTexture(GL_TEXTURE_2D, gNormal);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, gNormal, 0);
+
+		// color + specular color buffer
+		glGenTextures(1, &gAlbedoSpec);
+		glBindTexture(GL_TEXTURE_2D, gAlbedoSpec);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, gAlbedoSpec, 0);
+
+		glGenTextures(1, &gRough);
+		glBindTexture(GL_TEXTURE_2D, gRough);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gRough, 0);
+
+		// tell OpenGL which color attachments we'll use (of this framebuffer) for rendering 
+		unsigned int attachments[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
+		glDrawBuffers(4, attachments);
+
+		// create and attach depth buffer (renderbuffer)
+		unsigned int rboDepth;
+		glGenRenderbuffers(1, &rboDepth);
+		glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _windowSize.x, _windowSize.y);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+
+		// finally check if framebuffer is complete
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "Framebuffer not complete!" << std::endl;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		// Also create framebuffer to hold SSAO processing stage 
+		glGenFramebuffers(1, &ssaoFBO);  glGenFramebuffers(1, &ssaoBlurFBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
+		// - SSAO color buffer
+		glGenTextures(1, &ssaoColorBuffer);
+		glBindTexture(GL_TEXTURE_2D, ssaoColorBuffer);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, _windowSize.x, _windowSize.y, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoColorBuffer, 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "SSAO Framebuffer not complete!" << std::endl;
+		// - and blur stage
+		glBindFramebuffer(GL_FRAMEBUFFER, ssaoBlurFBO);
+		glGenTextures(1, &ssaoColorBufferBlur);
+		glBindTexture(GL_TEXTURE_2D, ssaoColorBufferBlur);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, _windowSize.x, _windowSize.y, 0, GL_RGB, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ssaoColorBufferBlur, 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "SSAO Blur Framebuffer not complete!" << std::endl;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+		// Sample kernel
+		std::uniform_real_distribution<GLfloat> randomFloats(0.0, 1.0); // generates random floats between 0.0 and 1.0
+		std::default_random_engine generator;
+		for (GLuint i = 0; i < 64; ++i)
+		{
+			glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0, randomFloats(generator) * 2.0 - 1.0, randomFloats(generator));
+			sample = glm::normalize(sample);
+			sample *= randomFloats(generator);
+			GLfloat scale = GLfloat(i) / 64.0;
+
+			// Scale samples s.t. they're more aligned to center of kernel
+			scale = 0.1f + scale * scale * (1.0f - 0.1f);
+			sample *= scale;
+			ssaoKernel.push_back(sample);
+		}
+		// Noise texture
+		for (GLuint i = 0; i < 16; i++)
+		{
+			glm::vec3 noise(randomFloats(generator) * 2.0 - 1.0, randomFloats(generator) * 2.0 - 1.0, 0.0f); // rotate around z-axis (in tangent space)
+			ssaoNoise.push_back(noise);
+		}
+		glGenTextures(1, &noiseTexture);
+		glBindTexture(GL_TEXTURE_2D, noiseTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, 4, 4, 0, GL_RGB, GL_FLOAT, &ssaoNoise[0]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	}
+
+	void GLExample::deferredRender(){
+
+			// 1. geometry pass: render scene's geometry/color data into gbuffer
+			// -----------------------------------------------------------------
+			glEnable(GL_DEPTH_TEST);
+			glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+			glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+			glViewport(0, 0, getFramebufferSize().x, getFramebufferSize().y) ;
+			glEnable(GL_CULL_FACE);
+			glCullFace(GL_BACK);
+
+			programForDefer->setUniformi("useDiffuseTexture", 1);
+			programForDefer->setUniformf("near", cam.NearPlane);
+			programForDefer->setUniformf("far", cam.FarPlane);
+			programForDefer->setUniformi("useDiffuseTexture", 1);
+			programForDefer->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForDefer);
+			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForDefer);
+			renderGround(programForDefer);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// 2.SSAO
+			glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
+            glClear(GL_COLOR_BUFFER_BIT);
+			programForSSAO->addTexture("gPosition", gPosition);
+			programForSSAO->addTexture("gNormal", gNormal);
+			programForSSAO->addTexture("texNoise", noiseTexture);
+
+            // // Send kernel + rotation 
+            for (GLuint i = 0; i < 64; ++i)
+				programForSSAO->setUniform3fv(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
+			programForSSAO->setUniformMat4fv("projection", cam.getProjectionMatrix());
+			programForSSAO->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			programForSSAO->setUniformf("SSAOradius", SSAOradius);
+            programForSSAO->bind();
+			renderQuad();
+			programForSSAO->unbind();
+
+        	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// 3.SSAO blurring
+			glBindFramebuffer(GL_FRAMEBUFFER, ssaoBlurFBO);
+            glClear(GL_COLOR_BUFFER_BIT);
+            programForSSAOBlur->addTexture("ssaoMap", ssaoColorBuffer);
+			programForSSAOBlur->setUniformi("blurSize", SSAOblurSize);
+			programForSSAOBlur->bind();
+            renderQuad();
+			programForSSAOBlur->unbind();
+        	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// 4. lighting pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
+			// -----------------------------------------------------------------------------------------------------------------------
+			glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+			programForDeferLighting->addTexture("gPosition", gPosition);
+			programForDeferLighting->addTexture("gNormal", gNormal);
+			programForDeferLighting->addTexture("gAlbedoSpec", gAlbedoSpec);
+			programForDeferLighting->addTexture("gRough", gRough);
+			programForDeferLighting->addTexture("ssao", ssaoColorBufferBlur);
+
+			// send light relevant uniforms
+			programForDeferLighting->setUniformf("manyLightIntensity", manyLightIntensity);
+			for (unsigned int i = 0; i < manyLightsPositions.size(); i++)
+			{
+				const float constant = 1.0f; // note that we don't send this to the shader, we assume it is always 1.0 (in our case)
+				const float linear = 0.7f;
+				const float quadratic = 1.8f;
+				programForDeferLighting->setUniform3fv("lights[" + std::to_string(i) + "].Position", manyLightsPositions[i] + manyLightPosition);
+				programForDeferLighting->setUniform3fv("lights[" + std::to_string(i) + "].Color", manyLightsColors[i]);
+				// update attenuation parameters and calculate radius
+				programForDeferLighting->setUniformf("lights[" + std::to_string(i) + "].Linear", linear);
+				programForDeferLighting->setUniformf("lights[" + std::to_string(i) + "].Quadratic", quadratic);
+				
+				// then calculate radius of light volume/sphere
+				const float maxBrightness = std::fmaxf(std::fmaxf(manyLightsColors[i].r, manyLightsColors[i].g), manyLightsColors[i].b);
+				float radius = (-linear + std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0f / 5.0f) * maxBrightness))) / (2.0f * quadratic);
+				programForDeferLighting->setUniformf("lights[" + std::to_string(i) + "].Radius", radius);
+			}
+			
+			programForDeferLighting->setUniform3fv("viewPos", cam.getPosition());
+			programForDeferLighting->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			programForDeferLighting->setUniformi("useDiffuseTexture", 1);
+			programForDeferLighting->setUniformi("showNormal", showNormal);
+			programForDeferLighting->setUniformi("showDiffuseTerm", showDiffuseTerm);
+			programForDeferLighting->setUniformi("showSpecular", showSpecular);
+			programForDeferLighting->setUniformi("showColor", showColor);
+			programForDeferLighting->setUniformi("outputMood", deferRenderOutput);
+			// finally render quad
+			programForDeferLighting->bind();
+			renderQuad();
+			programForDeferLighting->unbind();
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
+			// blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
+			// the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the 		
+			// depth buffer in another shader stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
+			glBlitFramebuffer(0, 0, _windowSize.x, _windowSize.y, 0, 0,_windowSize.x, _windowSize.y, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			renderLightBox(true);
+
+			renderPlane(ssaoColorBufferBlur);
+			// renderPlane(gRough);
+			// renderPlane(gAlbedoSpec);
+	}
+
+	
+	void GLExample::renderQuad(){
+		if (quadVAO == 0)
+		{
+			float quadVertices[] = {
+				// positions        // texture Coords
+				-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+				-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+				1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+				1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+			};
+			// setup plane VAO
+			glGenVertexArrays(1, &quadVAO);
+			glGenBuffers(1, &quadVBO);
+			glBindVertexArray(quadVAO);
+			glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+		}
+		glBindVertexArray(quadVAO);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glBindVertexArray(0);
+	}
+
+	void GLExample::forwardRender(){
 		//***********----------------First Pass rendering from light view space-----------------**********************//
 		
 		glEnable(GL_DEPTH_TEST);
@@ -134,7 +381,6 @@ namespace cgCourse
 		float near_plane =0.0f, far_plane = 150.0f;
 		glm::mat4 lightProjection = glm::ortho(-40.0f, 40.0f, -40.0f, 40.0f, near_plane, far_plane);
 		// TODO: compute lightSpaceMatrix
-		// for(int i = 0; i<lights.size(); i++){
 		for(int i = 0; i<lights.size(); ++i){
 			glm::mat4 lightView = glm::lookAt(lights[i].position,
                                   fufu.objectPosition, 
@@ -155,16 +401,16 @@ namespace cgCourse
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
-		renderLightBox();
+		renderLightBox(false);
 		if(disPlay_shadowMap)
-			renderPlane();
+			renderPlane(shadows[0].depthMap);
 		if(isPBR){
 			addMultipleLightVariables(programForPBR);
 			addShadowVariables(programForPBR, lightSpaceMatrixes);
 		}
 
 		renderCubes(lightSpaceMatrixes);
-		renderGround(lightSpaceMatrixes);
+		renderGround(programForPBR);
 
 		programForPBR->setUniformi("useDiffuseTexture", 1);
 		programForPBR->setUniformi("showNormal", showNormal);
@@ -174,8 +420,25 @@ namespace cgCourse
 
 		gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
 		fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
-		renderSkybox();
+	}
 
+	bool GLExample::render()
+	{
+		//***********----------------Control and frame-----------------**********************//
+		currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		update();
+		cam.updateCameraData();
+
+		if(isDefer)
+			deferredRender();
+		else
+			forwardRender();
+		
+
+		renderSkybox();
 		processInput(window_);
 		updateGUI();
 		
@@ -278,13 +541,14 @@ namespace cgCourse
 		lights.push_back(LightInfo());
         lights.back().radiance = glm::vec3(0.7, 0.7, 0.7);
         lights.back().position = glm::vec3(0.0, 3.0, -2.0);
+
 		lightboxes.push_back(std::make_shared<Cube>());
 		lightboxes.back()->createVertexArray(0,1,2,3,4);
 		lightboxes.back()->setPosition(lights.back().position);
 		lightboxes.back()->setScaling(glm::vec3(0.05, 0.05, 0.05));
 
 		lights.push_back(LightInfo());
-        lights.back().radiance = glm::vec3(0.7, 0.7, 0.7);
+        lights.back().radiance = glm::vec3(1.7, 1.7, 1.7);
         lights.back().position = glm::vec3(15.0, 4.0, -8.0);
 
 		lightboxes.push_back(std::make_shared<Cube>());
@@ -346,41 +610,42 @@ namespace cgCourse
 			shadows.push_back(shadow);
 		}
 
+		// manylight
+		for (unsigned int i = 0; i < MANY_LIGHT_NUM; i++)
+			{
+				// calculate slightly random offsets
+				float xPos = static_cast<float>(((rand() % 100) / 100.0) * manyLightRadius - 3.0);
+				float yPos = static_cast<float>(((rand() % 100) / 100.0) * manyLightRadius - 4.0);
+				float zPos = static_cast<float>(((rand() % 100) / 100.0) * manyLightRadius - 3.0);
+				manyLightsPositions.push_back(glm::vec3(xPos, yPos, zPos));
+
+				manyLightsboxes.push_back(std::make_shared<Cube>());
+				manyLightsboxes.back()->createVertexArray(0,1,2,3,4);
+				manyLightsboxes.back()->setPosition(manyLightsPositions.back());
+				manyLightsboxes.back()->setScaling(glm::vec3(0.01, 0.01, 0.01));
+				
+				// also calculate random color
+				float rColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.)
+				float gColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.)
+				float bColor = static_cast<float>(((rand() % 100) / 200.0f) + 0.5); // between 0.5 and 1.)
+				manyLightsColors.push_back(glm::vec3(rColor, gColor, bColor));
+			}
 	}
+
 	void GLExample::updateGUI(){
 		//**********---------------------- UI settings ----------------------**********// 
 		ImGui_ImplGlfwGL3_NewFrame();
-        // ImGui_ImplGlfw_NewFrame();
 		{
-			// ImGui::Begin("Lamp");
-			//lamp control
-			// ImGui::Text("Lamp control: ");
-			// ImGui::SliderFloat3("Light position", &pointLight.Position.x, -5.0f, 5.0f);
-			// ImGui::SliderFloat("Light width", &lightWidth, 2.0f, 250.0f);
-			// ImGui::ColorEdit3("Light color", &pointLight.Color.x);
-		}
-		{
-			ImGui::Begin("Shadow Render");
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::Text("Shadow Type: ");
-			ImGui::RadioButton("No Shadow", (int *)&shadowType, 0); ImGui::SameLine();
-            ImGui::RadioButton("basic shadow", (int *)&shadowType, 1); ImGui::SameLine();
-			ImGui::RadioButton("PCF", (int *)&shadowType, 2); ImGui::SameLine();
-			
-			ImGui::RadioButton("PCSS with VSSM", (int *)&shadowType, 3); 
-			if(shadowType == 2)
-				ImGui::SliderInt("PCF Sample Numbers",  (int *)&PCF_samples, 0, 10);
-			if(shadowType == 3)
-				ImGui::SliderFloat("Light Size", &lightSize, 0.1f, 100.0f);
-			ImGui::Checkbox("Display shadow map", &disPlay_shadowMap);
+			ImGui::Begin("Center control");
+				
+			ImGui::Checkbox("Deferred Rendering", &isDefer);
 			ImGui::End();
 		}
-
 		{
 			ImGui::Begin("Furina Controll");
 			ImGui::Text("Position:");
 			ImGui::SliderFloat("X", &fufu.objectPosition.x, -10.0f, 10.0f, "%.2f");
-			ImGui::SliderFloat("Y", &fufu.objectPosition.y, -10.0f, 10.0f, "%.2f");
+			ImGui::SliderFloat("Y", &fufu.objectPosition.y, -15.0f, 10.0f, "%.2f");
 			ImGui::SliderFloat("Z", &fufu.objectPosition.z, -10.0f, 10.0f, "%.2f");
 
 			ImGui::End();
@@ -406,6 +671,60 @@ namespace cgCourse
 			ImGui::End();
 		}
 
+		if(isDefer){
+			{
+				ImGui::Begin("Many Light Controll");
+				ImGui::Text("Position:");
+				ImGui::SliderFloat("X", &manyLightPosition.x, -15.0f, 15.0f, "%.2f");
+				ImGui::SliderFloat("Y", &manyLightPosition.y, -15.0f, 15.0f, "%.2f");
+				ImGui::SliderFloat("Z", &manyLightPosition.z, -15.0f, 15.0f, "%.2f");
+				ImGui::Text("Intensity:");
+				ImGui::SliderFloat("", &manyLightIntensity, 0.0, 10.0f, "%.2f");
+				ImGui::Text("SSAORadius:");
+				ImGui::SliderFloat("SSAORadius", &SSAOradius, 0.1f, 3.0f, "%.2f");
+				ImGui::End();
+			}
+			{
+				ImGui::Begin("Rendering Controll");
+				ImGui::Text("Output");
+				ImGui::RadioButton("All", &deferRenderOutput, 0);
+				ImGui::RadioButton("posotion", &deferRenderOutput, 1);ImGui::SameLine();
+				ImGui::RadioButton("depth", &deferRenderOutput, 6);ImGui::SameLine();
+				ImGui::RadioButton("albedo", &deferRenderOutput, 2);
+				ImGui::RadioButton("normal", &deferRenderOutput, 3);
+				ImGui::RadioButton("metalness", &deferRenderOutput, 4);ImGui::SameLine();
+				ImGui::RadioButton("roughness", &deferRenderOutput, 5);
+				ImGui::RadioButton("ssao", &deferRenderOutput, 7);
+
+				ImGui::Text("SSAORadius:");
+				ImGui::SliderFloat("SSAORadius", &SSAOradius, 0.1f, 3.0f, "%.2f");
+				ImGui::Text("SSAOblurSize:");
+				ImGui::SliderInt("SSAOblurSize", &SSAOblurSize, 0, 6);
+				
+				ImGui::End();
+			}
+		}
+		else{
+
+		{
+			ImGui::Begin("Shadow Render");
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			ImGui::Text("Shadow Type: ");
+			ImGui::RadioButton("No Shadow", (int *)&shadowType, 0); ImGui::SameLine();
+            ImGui::RadioButton("basic shadow", (int *)&shadowType, 1); ImGui::SameLine();
+			ImGui::RadioButton("PCF", (int *)&shadowType, 2); ImGui::SameLine();
+			
+			ImGui::RadioButton("PCSS with VSSM", (int *)&shadowType, 3); 
+			if(shadowType == 2)
+				ImGui::SliderInt("PCF Sample Numbers",  (int *)&PCF_samples, 0, 10);
+			if(shadowType == 3)
+				ImGui::SliderFloat("Light Size", &lightSize, 0.1f, 100.0f);
+			ImGui::Checkbox("Display shadow map", &disPlay_shadowMap);
+			ImGui::End();
+		}
+
+
+
 		{
 			ImGui::Begin("Static Light Controll");
 			ImGui::Text("Position:");
@@ -416,6 +735,9 @@ namespace cgCourse
 			ImGui::InputFloat3("RBG", &lights[1].radiance.x, 2);
 			ImGui::End();
 		}
+
+		
+		
 
 		{
 			ImGui::Begin("Rendering Controll");
@@ -429,6 +751,9 @@ namespace cgCourse
 			ImGui::SliderFloat(" ", &ambientFactor, 0, 1.0f, "%.1f");
 			ImGui::End();
 		}
+
+		}
+		
 
 		// {
 		// 	ImGui::Begin("PBR Debuger");
@@ -498,9 +823,6 @@ namespace cgCourse
 
 	void GLExample::computeSAT(const ShadowMapping & shadow){
 		programForSAT->bind();
-		// glUniform1i(programForSAT->getUniformLocation("input_image"), 0);
-		//glBindImageTexture(0, shadows.SAT[0], 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RG32F);
-		// glUniform1i(programForSAT->getUniformLocation("output_image"), 1);
 		//下面这一句疯狂报错，segmentation fault
 		glBindImageTexture(0, shadow.depthMap, 0, GL_FALSE, 0, GL_READ_ONLY, GL_RG32F);
 		glBindImageTexture(1, shadow.varianceTexture[0], 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RG32F);
@@ -530,13 +852,11 @@ namespace cgCourse
 		programForSkybox->unbind();
 	}
 
-	void GLExample::renderPlane(){
+	void GLExample::renderPlane(const GLuint id){
 		programForPlane->bind();
-
 		glActiveTexture(GL_TEXTURE0);
-		
-		//glBindTexture(GL_TEXTURE_2D,  cubeDiffuse->getTexHandle());
-		glBindTexture(GL_TEXTURE_2D, shadows[0].depthMap);
+		glBindTexture(GL_TEXTURE_2D,  id);
+		//glBindTexture(GL_TEXTURE_2D, id);
 		//glBindTexture(GL_TEXTURE_2D, shadows[0].varianceTexture[1]);
 		glUniform1i(programForPlane->getUniformLocation("screenTexture"), 0);
 		screenPlane->draw();
@@ -551,7 +871,6 @@ namespace cgCourse
 		
 		program->setUniform3fv("camPos", cam.getPosition());
 		program->setUniformf("ambientFactor", ambientFactor);
-		
 
 		int c = 0;
 		
@@ -578,18 +897,15 @@ namespace cgCourse
 		}
 	}
 
-	void GLExample::renderGround(const std::vector<glm::mat4> & lightSpaceMatrixes){
-		if(isPBR){
+	void GLExample::renderGround(const std::shared_ptr<ShaderProgram> & program){
 
 			mvpMatrix = cam.getViewProjectionMatrix() * ground->getModelMatrix();
 
-			programForPBR->setUniformMat4fv("mvpMatrix", mvpMatrix);
-       		programForPBR->setUniformMat4fv("modelMatrix", ground->getModelMatrix());
-			programForPBR->setUniformi("useDiffuseTexture", 0);
+			program->setUniformMat4fv("mvpMatrix", mvpMatrix);
+       		program->setUniformMat4fv("modelMatrix", ground->getModelMatrix());
+			program->setUniformi("useDiffuseTexture", 0);
 
-			ground->draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR, false, nullptr);
-
-		 }
+			ground->draw(cam.getProjectionMatrix(), cam.getViewMatrix(), program, false, nullptr);
 	}
 
 	void GLExample::renderCubes(const std::vector<glm::mat4> & lightSpaceMatrixes)
@@ -605,15 +921,26 @@ namespace cgCourse
 		}
 	}
 
-	void GLExample::renderLightBox()
+	void GLExample::renderLightBox(bool isMany)
 	{
 		programForLightBox->bind();
-		for(int i = 0; i<lights.size();i++){
-			mvpMatrix = cam.getViewProjectionMatrix() * lightboxes[i]->getModelMatrix();
-			glUniform3fv(programForLightBox->getUniformLocation("objectColor"), 1,  &lights[i].radiance[0]);
-			glUniformMatrix4fv(programForLightBox->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
-			lightboxes[i]->draw();
+		if(!isMany){
+			for(int i = 0; i<lights.size();i++){
+				mvpMatrix = cam.getViewProjectionMatrix() * lightboxes[i]->getModelMatrix();
+				glUniform3fv(programForLightBox->getUniformLocation("objectColor"), 1,  &lights[i].radiance[0]);
+				glUniformMatrix4fv(programForLightBox->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
+				lightboxes[i]->draw();
+			}
+
+		}else{
+			for(int i = 0; i<manyLightsboxes.size(); i++){
+				mvpMatrix = cam.getViewProjectionMatrix() * manyLightsboxes[i]->getModelMatrix();
+				glUniform3fv(programForLightBox->getUniformLocation("objectColor"), 1,  &manyLightsColors[i][0]);
+				glUniformMatrix4fv(programForLightBox->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
+				manyLightsboxes[i]->draw();
+			}
 		}
+		
 		programForLightBox->unbind();
 	}
 

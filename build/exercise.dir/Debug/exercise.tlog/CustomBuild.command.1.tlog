@@ -1,6 +1,6 @@
-^E:\CGCOURSE\CGCOURSE\EXERCISE4-KAIFAZHONG\CMAKELISTS.TXT
+^E:\CGCOURSE\CGCOURSE\REALTIME1.0\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Realtime1.0 -BE:/CGcourse/CGcourse/Realtime1.0/build --check-stamp-file E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

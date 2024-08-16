@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{56FE8E33-AFD5-362A-9AE0-B1A353230764}</ProjectGuid>
+    <ProjectGuid>{B879C6AC-D2EF-36F1-9C92-249B0B37B77E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <VcpkgEnabled>false</VcpkgEnabled>
     <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
@@ -60,26 +60,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imgui.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imgui.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">imgui.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">imgui.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">imgui</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -92,16 +92,16 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SHADER_DIR="E:/CGcourse/CGcourse/Realtime1.0/shader";SKY_DIR="E:/CGcourse/CGcourse/Realtime1.0/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Realtime1.0/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;SHADER_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -125,18 +125,18 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Realtime1.0/shader";SKY_DIR="E:/CGcourse/CGcourse/Realtime1.0/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Realtime1.0/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -149,7 +149,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -160,18 +160,18 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Realtime1.0/shader";SKY_DIR="E:/CGcourse/CGcourse/Realtime1.0/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Realtime1.0/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -184,7 +184,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "E:/CGcourse/CGcourse/vcpkg/installed/x64-windows/include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -196,16 +196,16 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader";SKY_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Exercise4-kaifazhong/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR="E:/CGcourse/CGcourse/Realtime1.0/shader";SKY_DIR="E:/CGcourse/CGcourse/Realtime1.0/res/skybox";RES_DIR="E:/CGcourse/CGcourse/Realtime1.0/res";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Exercise4-kaifazhong/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SHADER_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/shader\";SKY_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res/skybox\";RES_DIR=\"E:/CGcourse/CGcourse/Realtime1.0/res\";_USE_MATH_DEFINES;GLFW_DLL;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui;E:\CGcourse\CGcourse\vcpkg\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -217,11 +217,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\CMakeLists.txt">
+    <CustomBuild Include="E:\CGcourse\CGcourse\Realtime1.0\imgui\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule E:/CGcourse/CGcourse/Realtime1.0/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Realtime1.0 -BE:/CGcourse/CGcourse/Realtime1.0/build --check-stamp-file E:/CGcourse/CGcourse/Realtime1.0/build/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -230,11 +230,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule E:/CGcourse/CGcourse/Realtime1.0/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Realtime1.0 -BE:/CGcourse/CGcourse/Realtime1.0/build --check-stamp-file E:/CGcourse/CGcourse/Realtime1.0/build/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -243,11 +243,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule E:/CGcourse/CGcourse/Realtime1.0/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Realtime1.0 -BE:/CGcourse/CGcourse/Realtime1.0/build --check-stamp-file E:/CGcourse/CGcourse/Realtime1.0/build/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -256,11 +256,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/CGcourse/CGcourse/Exercise4-kaifazhong/imgui/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule E:/CGcourse/CGcourse/Realtime1.0/imgui/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/imgui/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Realtime1.0 -BE:/CGcourse/CGcourse/Realtime1.0/build --check-stamp-file E:/CGcourse/CGcourse/Realtime1.0/build/imgui/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -269,19 +269,19 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\imgui\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\CGcourse\CGcourse\Realtime1.0\build\imgui\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui.cpp" />
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui_demo.cpp" />
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui_draw.cpp" />
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\imgui\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui_demo.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui_draw.cpp" />
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\imgui\imgui_impl_glfw_gl3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\build\ZERO_CHECK.vcxproj">
-      <Project>{C3CBC9FE-B67D-3A64-B82B-6B016A17BF26}</Project>
+    <ProjectReference Include="E:\CGcourse\CGcourse\Realtime1.0\build\ZERO_CHECK.vcxproj">
+      <Project>{C2550B35-6B4B-3131-8B7F-DF997509F507}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

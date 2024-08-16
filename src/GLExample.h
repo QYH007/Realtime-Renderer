@@ -59,6 +59,8 @@ namespace cgCourse
 		bool init() override;
 		bool update() override;
 		bool render() override;
+		void deferredRender();
+		void forwardRender();
 		bool testrender();
 		bool end() override;
 		// Camera cam;
@@ -69,15 +71,19 @@ namespace cgCourse
 	private:
 		void lightInit();
 		bool sceneInit();
+		void deferredInit();
 		void addLightVariables(const std::shared_ptr<ShaderProgram>& _program);
 		void addMultipleLightVariables(const std::shared_ptr<ShaderProgram>& _program);
 		void addShadowVariables(const std::shared_ptr<ShaderProgram>& _program,const std::vector<glm::mat4> & lightSpaceMatrixes);
-		void renderLightBox();
+		void renderLightBox(bool isManyLight);
 		void computeSAT(const ShadowMapping & shadow);
 		void renderCubes(const std::vector<glm::mat4> & lightSpaceMatrixes);
 		void renderTorus(const std::vector<glm::mat4> & lightSpaceMatrixes);
-		void renderGround(const std::vector<glm::mat4> & lightSpaceMatrixes);
-		void renderPlane();
+		void renderGround(const std::shared_ptr<ShaderProgram> & program);
+		void renderPlane(const GLuint id);
+		void renderQuad();
+		
+		// void renderPlane();
 		void renderSkybox();
 		void updateGUI();
 		void processInput(GLFWwindow* window);
@@ -91,7 +97,11 @@ namespace cgCourse
 		std::shared_ptr<ShaderProgram> programForTorusNormals;
 		std::shared_ptr<ShaderProgram> programForLightBox;
 		std::shared_ptr<ShaderProgram> programForPBR;
+		std::shared_ptr<ShaderProgram> programForDefer;
 		std::shared_ptr<ShaderProgram> programForSkybox;
+		std::shared_ptr<ShaderProgram> programForDeferLighting;
+		std::shared_ptr<ShaderProgram> programForSSAO;
+		std::shared_ptr<ShaderProgram> programForSSAOBlur;
 
 		std::shared_ptr<ComputingShaderProgram> programForSAT;
 
@@ -127,11 +137,16 @@ namespace cgCourse
 		float currentFrame = 0.0f;
 		float deltaTime = 0.0f;
 
+		unsigned int gBuffer;
+		unsigned int gPosition, gNormal, gAlbedoSpec, gRough;
+		unsigned int quadVAO = 0, quadVBO;
+
 
 		glm::vec3 lightboxColor;
 		glm::mat4 mvpMatrix = glm::mat4(1);
 
 		bool isPBR = true;
+		bool isDefer = false;
 		bool drawTorusNormals = false;
 		bool disPlay_shadowMap = true;
 		unsigned int PCF_samples = 3;
@@ -143,6 +158,23 @@ namespace cgCourse
 		std::vector<LightInfo> lights;
 		std::vector<std::shared_ptr<Cube>> lightboxes;
 		std::vector<ShadowMapping> shadows;
+
+		const unsigned int MANY_LIGHT_NUM = 32;
+		float manyLightRadius = 12.0f;
+		float manyLightIntensity = 10.0f;
+		glm::vec3 manyLightPosition = glm::vec3(0, 5, 0);
+		std::vector<glm::vec3> manyLightsPositions;
+		std::vector<glm::vec3> manyLightsColors;
+		std::vector<std::shared_ptr<Cube>> manyLightsboxes;
+
+		std::vector<glm::vec3> ssaoKernel;
+		GLuint ssaoFBO, ssaoBlurFBO;
+		GLuint ssaoColorBuffer, ssaoColorBufferBlur;
+		std::vector<glm::vec3> ssaoNoise;
+		GLuint noiseTexture;
+		float SSAOradius = 1.0;
+		int SSAOblurSize = 4;
+		int deferRenderOutput = 0;
 		
 		bool showNormal = false;
 		bool showDiffuseTerm = true;

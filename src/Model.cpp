@@ -168,7 +168,7 @@ namespace cgCourse{
         auto mvpMatrix = _projectionMatrix * _viewMatrix * this->getModelMatrix();
         
             _shaderProgram->setUniformMat4fv("mvpMatrix", mvpMatrix);
-            // _shaderProgram->setUniformMat4fv("viewMatrix", _viewMatrix);
+            _shaderProgram->setUniformMat4fv("viewMatrix", _viewMatrix);
             _shaderProgram->setUniformMat4fv("modelMatrix", getModelMatrix());
             for (auto &e:elements){
                 e->draw(_projectionMatrix, _viewMatrix, _shaderProgram, false, getMaterial());

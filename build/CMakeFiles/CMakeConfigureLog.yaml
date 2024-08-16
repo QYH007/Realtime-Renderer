@@ -24,9 +24,9 @@ events:
       The output was:
       0
       适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-      生成启动时间为 2024/8/7 20:11:52。
+      生成启动时间为 2024/8/16 15:39:15。
       
-      节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\3.29.1\\CompilerIdC\\CompilerIdC.vcxproj”(默认目标)。
+      节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\3.29.1\\CompilerIdC\\CompilerIdC.vcxproj”(默认目标)。
       PrepareForBuild:
         正在创建目录“Debug\\”。
         正在创建目录“Debug\\CompilerIdC.tlog\\”。
@@ -38,7 +38,7 @@ events:
         CMakeCCompilerId.c
       Link:
         E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
-        CompilerIdC.vcxproj -> E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\3.29.1\\CompilerIdC\\CompilerIdC.exe
+        CompilerIdC.vcxproj -> E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\3.29.1\\CompilerIdC\\CompilerIdC.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
         :VCEnd
@@ -46,13 +46,13 @@ events:
       FinalizeBuildStatus:
         正在删除文件“Debug\\CompilerIdC.tlog\\unsuccessfulbuild”。
         正在对“Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate”执行 Touch 任务。
-      已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\3.29.1\\CompilerIdC\\CompilerIdC.vcxproj”(默认目标)的操作。
+      已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\3.29.1\\CompilerIdC\\CompilerIdC.vcxproj”(默认目标)的操作。
       
       已成功生成。
           0 个警告
           0 个错误
       
-      已用时间 00:00:02.67
+      已用时间 00:00:01.54
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -60,7 +60,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
       
       The C compiler identification is MSVC, found in:
-        E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/3.29.1/CompilerIdC/CompilerIdC.exe
+        E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/3.29.1/CompilerIdC/CompilerIdC.exe
       
   -
     kind: "message-v1"
@@ -78,9 +78,9 @@ events:
       The output was:
       0
       适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-      生成启动时间为 2024/8/7 20:11:55。
+      生成启动时间为 2024/8/16 15:39:16。
       
-      节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\3.29.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj”(默认目标)。
+      节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\3.29.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj”(默认目标)。
       PrepareForBuild:
         正在创建目录“Debug\\”。
         正在创建目录“Debug\\CompilerIdCXX.tlog\\”。
@@ -92,7 +92,7 @@ events:
         CMakeCXXCompilerId.cpp
       Link:
         E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\3.29.1\\CompilerIdCXX\\CompilerIdCXX.exe
+        CompilerIdCXX.vcxproj -> E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\3.29.1\\CompilerIdCXX\\CompilerIdCXX.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
         :VCEnd
@@ -100,13 +100,13 @@ events:
       FinalizeBuildStatus:
         正在删除文件“Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild”。
         正在对“Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate”执行 Touch 任务。
-      已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\3.29.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj”(默认目标)的操作。
+      已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\3.29.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj”(默认目标)的操作。
       
       已成功生成。
           0 个警告
           0 个错误
       
-      已用时间 00:00:02.47
+      已用时间 00:00:01.32
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -114,7 +114,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
       
       The CXX compiler identification is MSVC, found in:
-        E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/3.29.1/CompilerIdCXX/CompilerIdCXX.exe
+        E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/3.29.1/CompilerIdCXX/CompilerIdCXX.exe
       
   -
     kind: "try_compile-v1"
@@ -125,8 +125,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-26ckpt"
-      binary: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-26ckpt"
+      source: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-00kddg"
+      binary: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-00kddg"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -139,39 +139,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-26ckpt'
+        Change Dir: 'E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-00kddg'
         
-        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_c474f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_2a5d1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-        生成启动时间为 2024/8/7 20:11:57。
+        生成启动时间为 2024/8/16 15:39:18。
         
-        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-26ckpt\\cmTC_c474f.vcxproj”(默认目标)。
+        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-00kddg\\cmTC_2a5d1.vcxproj”(默认目标)。
         PrepareForBuild:
-          正在创建目录“cmTC_c474f.dir\\Debug\\”。
-          正在创建目录“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-26ckpt\\Debug\\”。
-          正在创建目录“cmTC_c474f.dir\\Debug\\cmTC_c474f.tlog\\”。
+          正在创建目录“cmTC_2a5d1.dir\\Debug\\”。
+          正在创建目录“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-00kddg\\Debug\\”。
+          正在创建目录“cmTC_2a5d1.dir\\Debug\\cmTC_2a5d1.tlog\\”。
         InitializeBuildStatus:
-          正在创建“cmTC_c474f.dir\\Debug\\cmTC_c474f.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-          正在对“cmTC_c474f.dir\\Debug\\cmTC_c474f.tlog\\unsuccessfulbuild”执行 Touch 任务。
+          正在创建“cmTC_2a5d1.dir\\Debug\\cmTC_2a5d1.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+          正在对“cmTC_2a5d1.dir\\Debug\\cmTC_2a5d1.tlog\\unsuccessfulbuild”执行 Touch 任务。
         ClCompile:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c474f.dir\\Debug\\\\" /Fd"cmTC_c474f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2a5d1.dir\\Debug\\\\" /Fd"cmTC_2a5d1.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
           用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.37.32822 版
           CMakeCCompilerABI.c
           版权所有(C) Microsoft Corporation。保留所有权利。
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c474f.dir\\Debug\\\\" /Fd"cmTC_c474f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2a5d1.dir\\Debug\\\\" /Fd"cmTC_2a5d1.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
         Link:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-26ckpt\\Debug\\cmTC_c474f.exe" /INCREMENTAL /ILK:"cmTC_c474f.dir\\Debug\\cmTC_c474f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-26ckpt/Debug/cmTC_c474f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-26ckpt/Debug/cmTC_c474f.lib" /MACHINE:X64  /machine:x64 cmTC_c474f.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_c474f.vcxproj -> E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-26ckpt\\Debug\\cmTC_c474f.exe
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-00kddg\\Debug\\cmTC_2a5d1.exe" /INCREMENTAL /ILK:"cmTC_2a5d1.dir\\Debug\\cmTC_2a5d1.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-00kddg/Debug/cmTC_2a5d1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-00kddg/Debug/cmTC_2a5d1.lib" /MACHINE:X64  /machine:x64 cmTC_2a5d1.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_2a5d1.vcxproj -> E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-00kddg\\Debug\\cmTC_2a5d1.exe
         FinalizeBuildStatus:
-          正在删除文件“cmTC_c474f.dir\\Debug\\cmTC_c474f.tlog\\unsuccessfulbuild”。
-          正在对“cmTC_c474f.dir\\Debug\\cmTC_c474f.tlog\\cmTC_c474f.lastbuildstate”执行 Touch 任务。
-        已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-26ckpt\\cmTC_c474f.vcxproj”(默认目标)的操作。
+          正在删除文件“cmTC_2a5d1.dir\\Debug\\cmTC_2a5d1.tlog\\unsuccessfulbuild”。
+          正在对“cmTC_2a5d1.dir\\Debug\\cmTC_2a5d1.tlog\\cmTC_2a5d1.lastbuildstate”执行 Touch 任务。
+        已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-00kddg\\cmTC_2a5d1.vcxproj”(默认目标)的操作。
         
         已成功生成。
             0 个警告
             0 个错误
         
-        已用时间 00:00:02.67
+        已用时间 00:00:01.42
         
       exitCode: 0
   -
@@ -211,8 +211,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-iuwrfw"
-      binary: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-iuwrfw"
+      source: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-n4ufi6"
+      binary: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-n4ufi6"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -225,39 +225,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-iuwrfw'
+        Change Dir: 'E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-n4ufi6'
         
-        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_d9b69.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_9194e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-        生成启动时间为 2024/8/7 20:12:00。
+        生成启动时间为 2024/8/16 15:39:20。
         
-        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-iuwrfw\\cmTC_d9b69.vcxproj”(默认目标)。
+        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n4ufi6\\cmTC_9194e.vcxproj”(默认目标)。
         PrepareForBuild:
-          正在创建目录“cmTC_d9b69.dir\\Debug\\”。
-          正在创建目录“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-iuwrfw\\Debug\\”。
-          正在创建目录“cmTC_d9b69.dir\\Debug\\cmTC_d9b69.tlog\\”。
+          正在创建目录“cmTC_9194e.dir\\Debug\\”。
+          正在创建目录“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n4ufi6\\Debug\\”。
+          正在创建目录“cmTC_9194e.dir\\Debug\\cmTC_9194e.tlog\\”。
         InitializeBuildStatus:
-          正在创建“cmTC_d9b69.dir\\Debug\\cmTC_d9b69.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-          正在对“cmTC_d9b69.dir\\Debug\\cmTC_d9b69.tlog\\unsuccessfulbuild”执行 Touch 任务。
+          正在创建“cmTC_9194e.dir\\Debug\\cmTC_9194e.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+          正在对“cmTC_9194e.dir\\Debug\\cmTC_9194e.tlog\\unsuccessfulbuild”执行 Touch 任务。
         ClCompile:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d9b69.dir\\Debug\\\\" /Fd"cmTC_d9b69.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9194e.dir\\Debug\\\\" /Fd"cmTC_9194e.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
           用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.37.32822 版
           CMakeCXXCompilerABI.cpp
           版权所有(C) Microsoft Corporation。保留所有权利。
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d9b69.dir\\Debug\\\\" /Fd"cmTC_d9b69.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9194e.dir\\Debug\\\\" /Fd"cmTC_9194e.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
         Link:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-iuwrfw\\Debug\\cmTC_d9b69.exe" /INCREMENTAL /ILK:"cmTC_d9b69.dir\\Debug\\cmTC_d9b69.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-iuwrfw/Debug/cmTC_d9b69.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-iuwrfw/Debug/cmTC_d9b69.lib" /MACHINE:X64  /machine:x64 cmTC_d9b69.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_d9b69.vcxproj -> E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-iuwrfw\\Debug\\cmTC_d9b69.exe
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n4ufi6\\Debug\\cmTC_9194e.exe" /INCREMENTAL /ILK:"cmTC_9194e.dir\\Debug\\cmTC_9194e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-n4ufi6/Debug/cmTC_9194e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-n4ufi6/Debug/cmTC_9194e.lib" /MACHINE:X64  /machine:x64 cmTC_9194e.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_9194e.vcxproj -> E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n4ufi6\\Debug\\cmTC_9194e.exe
         FinalizeBuildStatus:
-          正在删除文件“cmTC_d9b69.dir\\Debug\\cmTC_d9b69.tlog\\unsuccessfulbuild”。
-          正在对“cmTC_d9b69.dir\\Debug\\cmTC_d9b69.tlog\\cmTC_d9b69.lastbuildstate”执行 Touch 任务。
-        已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-iuwrfw\\cmTC_d9b69.vcxproj”(默认目标)的操作。
+          正在删除文件“cmTC_9194e.dir\\Debug\\cmTC_9194e.tlog\\unsuccessfulbuild”。
+          正在对“cmTC_9194e.dir\\Debug\\cmTC_9194e.tlog\\cmTC_9194e.lastbuildstate”执行 Touch 任务。
+        已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-n4ufi6\\cmTC_9194e.vcxproj”(默认目标)的操作。
         
         已成功生成。
             0 个警告
             0 个错误
         
-        已用时间 00:00:02.70
+        已用时间 00:00:01.32
         
       exitCode: 0
   -
@@ -303,8 +303,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-oszssq"
-      binary: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-oszssq"
+      source: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-94cst4"
+      binary: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-94cst4"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -317,39 +317,39 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-oszssq'
+        Change Dir: 'E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-94cst4'
         
-        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_04da2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_da45c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-        生成启动时间为 2024/8/7 20:12:03。
+        生成启动时间为 2024/8/16 15:39:22。
         
-        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\cmTC_04da2.vcxproj”(默认目标)。
+        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\cmTC_da45c.vcxproj”(默认目标)。
         PrepareForBuild:
-          正在创建目录“cmTC_04da2.dir\\Debug\\”。
-          正在创建目录“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\Debug\\”。
-          正在创建目录“cmTC_04da2.dir\\Debug\\cmTC_04da2.tlog\\”。
+          正在创建目录“cmTC_da45c.dir\\Debug\\”。
+          正在创建目录“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\Debug\\”。
+          正在创建目录“cmTC_da45c.dir\\Debug\\cmTC_da45c.tlog\\”。
         InitializeBuildStatus:
-          正在创建“cmTC_04da2.dir\\Debug\\cmTC_04da2.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-          正在对“cmTC_04da2.dir\\Debug\\cmTC_04da2.tlog\\unsuccessfulbuild”执行 Touch 任务。
+          正在创建“cmTC_da45c.dir\\Debug\\cmTC_da45c.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+          正在对“cmTC_da45c.dir\\Debug\\cmTC_da45c.tlog\\unsuccessfulbuild”执行 Touch 任务。
         ClCompile:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_04da2.dir\\Debug\\\\" /Fd"cmTC_04da2.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\src.c"
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_da45c.dir\\Debug\\\\" /Fd"cmTC_da45c.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\src.c"
           用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.37.32822 版
           src.c
           版权所有(C) Microsoft Corporation。保留所有权利。
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_04da2.dir\\Debug\\\\" /Fd"cmTC_04da2.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\src.c"
-        E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\src.c(1,10): fatal  error C1083: 无法打开包括文件: “pthread.h”: No such file or directory [E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\cmTC_04da2.vcxproj]
-        已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\cmTC_04da2.vcxproj”(默认目标)的操作 - 失败。
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_da45c.dir\\Debug\\\\" /Fd"cmTC_da45c.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\src.c"
+        E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\src.c(1,10): fatal  error C1083: 无法打开包括文件: “pthread.h”: No such file or directory [E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\cmTC_da45c.vcxproj]
+        已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\cmTC_da45c.vcxproj”(默认目标)的操作 - 失败。
         
         生成失败。
         
-        “E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\cmTC_04da2.vcxproj”(默认目标) (1) ->
+        “E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\cmTC_da45c.vcxproj”(默认目标) (1) ->
         (ClCompile 目标) -> 
-          E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\src.c(1,10): fatal  error C1083: 无法打开包括文件: “pthread.h”: No such file or directory [E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-oszssq\\cmTC_04da2.vcxproj]
+          E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\src.c(1,10): fatal  error C1083: 无法打开包括文件: “pthread.h”: No such file or directory [E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-94cst4\\cmTC_da45c.vcxproj]
         
             0 个警告
             1 个错误
         
-        已用时间 00:00:00.96
+        已用时间 00:00:00.57
         
       exitCode: 1
   -
@@ -366,8 +366,8 @@ events:
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-2g95og"
-      binary: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-2g95og"
+      source: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-3rsx1w"
+      binary: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-3rsx1w"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -380,41 +380,41 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-2g95og'
+        Change Dir: 'E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-3rsx1w'
         
-        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_44da9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_09c28.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-        生成启动时间为 2024/8/7 20:12:04。
+        生成启动时间为 2024/8/16 15:39:22。
         
-        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\cmTC_44da9.vcxproj”(默认目标)。
+        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\cmTC_09c28.vcxproj”(默认目标)。
         PrepareForBuild:
-          正在创建目录“cmTC_44da9.dir\\Debug\\”。
-          正在创建目录“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\Debug\\”。
-          正在创建目录“cmTC_44da9.dir\\Debug\\cmTC_44da9.tlog\\”。
+          正在创建目录“cmTC_09c28.dir\\Debug\\”。
+          正在创建目录“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\Debug\\”。
+          正在创建目录“cmTC_09c28.dir\\Debug\\cmTC_09c28.tlog\\”。
         InitializeBuildStatus:
-          正在创建“cmTC_44da9.dir\\Debug\\cmTC_44da9.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-          正在对“cmTC_44da9.dir\\Debug\\cmTC_44da9.tlog\\unsuccessfulbuild”执行 Touch 任务。
+          正在创建“cmTC_09c28.dir\\Debug\\cmTC_09c28.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+          正在对“cmTC_09c28.dir\\Debug\\cmTC_09c28.tlog\\unsuccessfulbuild”执行 Touch 任务。
         ClCompile:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_44da9.dir\\Debug\\\\" /Fd"cmTC_44da9.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\CheckFunctionExists.c"
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_09c28.dir\\Debug\\\\" /Fd"cmTC_09c28.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\CheckFunctionExists.c"
           用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.37.32822 版
           CheckFunctionExists.c
           版权所有(C) Microsoft Corporation。保留所有权利。
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_44da9.dir\\Debug\\\\" /Fd"cmTC_44da9.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\CheckFunctionExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_09c28.dir\\Debug\\\\" /Fd"cmTC_09c28.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\CheckFunctionExists.c"
         Link:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\Debug\\cmTC_44da9.exe" /INCREMENTAL /ILK:"cmTC_44da9.dir\\Debug\\cmTC_44da9.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-2g95og/Debug/cmTC_44da9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-2g95og/Debug/cmTC_44da9.lib" /MACHINE:X64  /machine:x64 cmTC_44da9.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: 无法打开文件“pthreads.lib” [E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\cmTC_44da9.vcxproj]
-        已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\cmTC_44da9.vcxproj”(默认目标)的操作 - 失败。
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\Debug\\cmTC_09c28.exe" /INCREMENTAL /ILK:"cmTC_09c28.dir\\Debug\\cmTC_09c28.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-3rsx1w/Debug/cmTC_09c28.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-3rsx1w/Debug/cmTC_09c28.lib" /MACHINE:X64  /machine:x64 cmTC_09c28.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: 无法打开文件“pthreads.lib” [E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\cmTC_09c28.vcxproj]
+        已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\cmTC_09c28.vcxproj”(默认目标)的操作 - 失败。
         
         生成失败。
         
-        “E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\cmTC_44da9.vcxproj”(默认目标) (1) ->
+        “E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\cmTC_09c28.vcxproj”(默认目标) (1) ->
         (Link 目标) -> 
-          LINK : fatal error LNK1104: 无法打开文件“pthreads.lib” [E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2g95og\\cmTC_44da9.vcxproj]
+          LINK : fatal error LNK1104: 无法打开文件“pthreads.lib” [E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3rsx1w\\cmTC_09c28.vcxproj]
         
             0 个警告
             1 个错误
         
-        已用时间 00:00:01.50
+        已用时间 00:00:00.83
         
       exitCode: 1
   -
@@ -431,8 +431,8 @@ events:
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-ymvtif"
-      binary: "E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-ymvtif"
+      source: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-kqjbg1"
+      binary: "E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-kqjbg1"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -445,41 +445,41 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-ymvtif'
+        Change Dir: 'E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-kqjbg1'
         
-        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_2df2d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): E:/ProgramFile/VisualStudio/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_46a79.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         适用于 .NET Framework MSBuild 版本 17.7.2+d6990bcfa
-        生成启动时间为 2024/8/7 20:12:06。
+        生成启动时间为 2024/8/16 15:39:23。
         
-        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\cmTC_2df2d.vcxproj”(默认目标)。
+        节点 1 上的项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\cmTC_46a79.vcxproj”(默认目标)。
         PrepareForBuild:
-          正在创建目录“cmTC_2df2d.dir\\Debug\\”。
-          正在创建目录“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\Debug\\”。
-          正在创建目录“cmTC_2df2d.dir\\Debug\\cmTC_2df2d.tlog\\”。
+          正在创建目录“cmTC_46a79.dir\\Debug\\”。
+          正在创建目录“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\Debug\\”。
+          正在创建目录“cmTC_46a79.dir\\Debug\\cmTC_46a79.tlog\\”。
         InitializeBuildStatus:
-          正在创建“cmTC_2df2d.dir\\Debug\\cmTC_2df2d.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-          正在对“cmTC_2df2d.dir\\Debug\\cmTC_2df2d.tlog\\unsuccessfulbuild”执行 Touch 任务。
+          正在创建“cmTC_46a79.dir\\Debug\\cmTC_46a79.tlog\\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+          正在对“cmTC_46a79.dir\\Debug\\cmTC_46a79.tlog\\unsuccessfulbuild”执行 Touch 任务。
         ClCompile:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2df2d.dir\\Debug\\\\" /Fd"cmTC_2df2d.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\CheckFunctionExists.c"
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_46a79.dir\\Debug\\\\" /Fd"cmTC_46a79.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\CheckFunctionExists.c"
           用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.37.32822 版
           CheckFunctionExists.c
           版权所有(C) Microsoft Corporation。保留所有权利。
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2df2d.dir\\Debug\\\\" /Fd"cmTC_2df2d.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\CheckFunctionExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_46a79.dir\\Debug\\\\" /Fd"cmTC_46a79.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\CheckFunctionExists.c"
         Link:
-          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\Debug\\cmTC_2df2d.exe" /INCREMENTAL /ILK:"cmTC_2df2d.dir\\Debug\\cmTC_2df2d.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-ymvtif/Debug/cmTC_2df2d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/CMakeFiles/CMakeScratch/TryCompile-ymvtif/Debug/cmTC_2df2d.lib" /MACHINE:X64  /machine:x64 cmTC_2df2d.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: 无法打开文件“pthread.lib” [E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\cmTC_2df2d.vcxproj]
-        已完成生成项目“E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\cmTC_2df2d.vcxproj”(默认目标)的操作 - 失败。
+          E:\\ProgramFile\\VisualStudio\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\Debug\\cmTC_46a79.exe" /INCREMENTAL /ILK:"cmTC_46a79.dir\\Debug\\cmTC_46a79.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-kqjbg1/Debug/cmTC_46a79.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/CGcourse/CGcourse/Realtime1.0/build/CMakeFiles/CMakeScratch/TryCompile-kqjbg1/Debug/cmTC_46a79.lib" /MACHINE:X64  /machine:x64 cmTC_46a79.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: 无法打开文件“pthread.lib” [E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\cmTC_46a79.vcxproj]
+        已完成生成项目“E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\cmTC_46a79.vcxproj”(默认目标)的操作 - 失败。
         
         生成失败。
         
-        “E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\cmTC_2df2d.vcxproj”(默认目标) (1) ->
+        “E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\cmTC_46a79.vcxproj”(默认目标) (1) ->
         (Link 目标) -> 
-          LINK : fatal error LNK1104: 无法打开文件“pthread.lib” [E:\\CGcourse\\CGcourse\\Exercise4-kaifazhong\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymvtif\\cmTC_2df2d.vcxproj]
+          LINK : fatal error LNK1104: 无法打开文件“pthread.lib” [E:\\CGcourse\\CGcourse\\Realtime1.0\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kqjbg1\\cmTC_46a79.vcxproj]
         
             0 个警告
             1 个错误
         
-        已用时间 00:00:01.47
+        已用时间 00:00:00.83
         
       exitCode: 1
 ...

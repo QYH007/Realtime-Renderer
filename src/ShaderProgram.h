@@ -36,7 +36,6 @@ namespace cgCourse
 		bool checkLinkStatusOfProgram(GLuint _program);
 		std::string loadFile(const std::string & filename) const;
 
-
 		GLuint program;
 		std::map<std::string,unsigned int> textures;
         std::map<std::string,glm::vec3> uniforms3fv;

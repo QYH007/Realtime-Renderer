@@ -1,58 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Camera.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\ComputingShaderProgram.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\ComputingShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Cube.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\GLApp.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\GLApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\GLExample.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\GLExample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Ground.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Ground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Mesh.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Model.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\ScreenPlane.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\ScreenPlane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\ShaderProgram.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Shape.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Skybox.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Texture.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\Torus.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\Torus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\src\main.cpp">
+    <ClCompile Include="E:\CGcourse\CGcourse\Realtime1.0\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="E:\CGcourse\CGcourse\Exercise4-kaifazhong\CMakeLists.txt" />
+    <CustomBuild Include="E:\CGcourse\CGcourse\Realtime1.0\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{A3945690-8A50-3C02-9169-9594A666D2D0}</UniqueIdentifier>
+      <UniqueIdentifier>{794B2091-8A09-370D-AC17-E4F28FC3BB04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

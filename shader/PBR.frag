@@ -412,12 +412,12 @@ void main()
     // Scale color by ratio of average luminances.
     vec3 mappedColor = (mappedLuminance / luminance) * directLighting;
 	color = vec4(pow(mappedColor, vec3(1.0/gamma)), 1.0);
-
+    color = vec4(directLighting, 1.0);
     if(showNormal == 1){
         color = vec4(normal, 1.0);
     }
     
-    // color = vec4(directLighting, 1.0);
+    
     // color = vec4(0.2,0.3,0.5,1.0);
     // color = vec4(albedo, 1.0);
 	// color = vec4(lightDir,1.0);

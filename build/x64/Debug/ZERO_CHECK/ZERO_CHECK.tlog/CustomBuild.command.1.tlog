@@ -1,6 +1,6 @@
-^E:\CGCOURSE\CGCOURSE\EXERCISE4-KAIFAZHONG\BUILD\CMAKEFILES\7BDAA063F9FFD85B85EA90A243B09B8F\GENERATE.STAMP.RULE
+^E:\CGCOURSE\CGCOURSE\REALTIME1.0\BUILD\CMAKEFILES\4234300C6C7F13ABD11FA81ECBB7BE1C\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Exercise4-kaifazhong -BE:/CGcourse/CGcourse/Exercise4-kaifazhong/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/CGcourse/CGcourse/Exercise4-kaifazhong/build/exercise.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/CGcourse/CGcourse/Realtime1.0 -BE:/CGcourse/CGcourse/Realtime1.0/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/CGcourse/CGcourse/Realtime1.0/build/exercise.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

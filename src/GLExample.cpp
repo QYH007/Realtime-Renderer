@@ -68,21 +68,24 @@ namespace cgCourse
 					glm::vec3(0, 1, 0),
 					-30, 127
 					);
-		//std::cout<<cam.getPosition().x<<", "<<cam.getPosition().y<<", "<<cam.getPosition().z<<std::endl;
 
-		programForShadows = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Shadows");
-		programForShape = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Shape");
-		programForTorusNormals = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Normals");
-		programForLightBox = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Lightbox");
-		programForPlane = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Plane");
-		programForPBR = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/PBR");
-		programForSkybox = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Skybox");
-		programForDefer = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Defer");
+		programForShadows 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Shadows");
+		programForShape 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Shape");
+		programForTorusNormals 	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Normals");
+		programForLightBox	 	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Lightbox");
+		programForPlane 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Plane");
+		programForPBR			= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/PBR");
+		programForSkybox 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Skybox");
+		programForDefer 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Defer");
 		programForDeferLighting = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/DeferLighting");
-		programForSSAO = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAO");
-		programForSSAOBlur = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAOBlur");
+		programForSSAO 			= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAO");
+		programForSSAOBlur 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAOBlur");
+		programForHDR2Cubemap 	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/HDR2Cube");
+		programForIrradianceGen = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/IrradianceGen");
+		programForPrefilterGen 	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/PrefilterGen");
+		programForLUTGen 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/LUTGen");
 		
-		programForSAT = std::make_shared<ComputingShaderProgram>(std::string(SHADER_DIR) + "/ComputeSAT");
+		programForSAT 			= std::make_shared<ComputingShaderProgram>(std::string(SHADER_DIR) + "/ComputeSAT");
 		programForSAT->bind();
 		programForSAT->SetUniform1i("input_image", 0);
 		programForSAT->SetUniform1i("output_image", 1);
@@ -96,8 +99,7 @@ namespace cgCourse
 
 	bool GLExample::update()
 	{
-		// torus->setRotation(1, glm::vec3(1.0f, 1.0f, 1.0f));
-		gun.setRotation(0.3, glm::vec3(0, 0, 1.0f));
+		//gun.setRotation(0.1, glm::vec3(0, 0, 1.0f));
 		fufu.setPosition(fufu.objectPosition);
 		gun.setPosition(gun.objectPosition);
 		cube->setPosition(cube->objectPosition);
@@ -118,7 +120,7 @@ namespace cgCourse
 		lights[0].position = glm::vec3(animation, 10, -10);
 		lightboxes[0]->setPosition(glm::vec3(animation, 10, -15));
 		lightboxes[1]->setPosition(lights[1].position);
-		gun.setPosition(gun.getPosition()+glm::vec3(0, animation*0.005, 0));
+		//gun.setPosition(gun.getPosition()+glm::vec3(0, animation*0.005, 0));
 		for(int i =0;i<manyLightsPositions.size();i++){
 			// manyLightsPositions[i] = manyLightsPositions[i] + manyLightPosition;
 			manyLightsboxes[i]->setPosition(manyLightsPositions[i] + manyLightPosition);
@@ -271,7 +273,7 @@ namespace cgCourse
             for (GLuint i = 0; i < 64; ++i)
 				programForSSAO->setUniform3fv(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
 			programForSSAO->setUniformMat4fv("projection", cam.getProjectionMatrix());
-			programForSSAO->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			// programForSSAO->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
 			programForSSAO->setUniformf("SSAOradius", SSAOradius);
             programForSSAO->bind();
 			renderQuad();
@@ -321,11 +323,12 @@ namespace cgCourse
 			programForDeferLighting->setUniform3fv("viewPos", cam.getPosition());
 			programForDeferLighting->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
 			programForDeferLighting->setUniformi("useDiffuseTexture", 1);
-			programForDeferLighting->setUniformi("showNormal", showNormal);
 			programForDeferLighting->setUniformi("showDiffuseTerm", showDiffuseTerm);
 			programForDeferLighting->setUniformi("showSpecular", showSpecular);
 			programForDeferLighting->setUniformi("showColor", showColor);
 			programForDeferLighting->setUniformi("outputMood", deferRenderOutput);
+			programForDeferLighting->addCubeMap("irradianceMap", irradianceCubemap->getTexHandle());
+			programForDeferLighting->setUniformi("isIBL", isIBL);
 			// finally render quad
 			programForDeferLighting->bind();
 			renderQuad();
@@ -403,20 +406,29 @@ namespace cgCourse
 
 		renderLightBox(false);
 		if(disPlay_shadowMap)
-			renderPlane(shadows[0].depthMap);
+			//renderPlane(shadows[0].depthMap);
+			//renderPlane(skyBosxtex->getTexHandle());
+			renderPlane(brdfLUTTexture);
 		if(isPBR){
 			addMultipleLightVariables(programForPBR);
 			addShadowVariables(programForPBR, lightSpaceMatrixes);
 		}
-
+		programForPBR->addTexture("brdfLUT", brdfLUTTexture);
+		programForPBR->addCubeMap("irradianceMap", irradianceCubemap->getTexHandle());
+		programForPBR->addCubeMap("prefilterMap", prefilterCubemap->getTexHandle());
+		programForPBR->setUniformi("isIBL", isIBL);
+		programForPBR->setUniformf("defaultRoughness", defaultRoughness);
+		programForPBR->setUniformf("defaultMetalness", defaultMetalness);
+		programForPBR->setUniformf("envIntensity", envIntensity);
 		renderCubes(lightSpaceMatrixes);
 		renderGround(programForPBR);
 
 		programForPBR->setUniformi("useDiffuseTexture", 1);
 		programForPBR->setUniformi("showNormal", showNormal);
-		programForPBR->setUniformi("showDiffuseTerm", showDiffuseTerm);
-		programForPBR->setUniformi("showSpecular", showSpecular);
+		programForPBR->setUniformi("isEnvironmentLight", isEnvironmentLight);
+		programForPBR->setUniformi("isDirectLight", isDirectLight);
 		programForPBR->setUniformi("showColor", showColor);
+		
 
 		gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
 		fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
@@ -438,11 +450,160 @@ namespace cgCourse
 			forwardRender();
 		
 
-		renderSkybox();
+		//renderSkybox(irradianceCubemap->getTexHandle());
+		renderSkybox(hdrCubemap->getTexHandle());
+
+		//renderSkybox(prefilterCubemap->getTexHandle());
+
 		processInput(window_);
 		updateGUI();
 		
 		return true;
+	}
+
+	void GLExample::creatHDRCubemap(std::shared_ptr<Texture> hrdTex, int texWeight, int texHeight){
+
+		hdrCubemap =  std::make_shared<Texture>();
+		hdrCubemap->createHDRCubemap(texWeight, texHeight);
+		// pbr: setup framebuffer
+		// ----------------------
+		unsigned int captureFBO;
+		unsigned int captureRBO;
+		glGenFramebuffers(1, &captureFBO);
+		glGenRenderbuffers(1, &captureRBO);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, texWeight, texHeight);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
+		
+
+		// pbr: set up projection and view matrices for capturing data onto the 6 cubemap face directions
+		// ----------------------------------------------------------------------------------------------
+		glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+		glm::mat4 captureViews[] =
+		{
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)),
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+			glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
+		};
+		programForHDR2Cubemap->addTexture("equirectangularMap", hrdTex->getTexHandle());
+		programForHDR2Cubemap->setUniformMat4fv("projection", captureProjection);
+		programForHDR2Cubemap->bind();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glViewport(0, 0, texWeight, texHeight); // don't forget to configure the viewport to the capture dimensions.
+		for (unsigned int i = 0; i < 6; ++i)
+		{
+			glUniformMatrix4fv(programForHDR2Cubemap->getUniformLocation("view"), 1, GL_FALSE, &captureViews[i][0][0]);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, hdrCubemap->getTexHandle(), 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			renderUnitCube();
+		}
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		// then let OpenGL generate mipmaps from first mip face (combatting visible dots artifact)
+		glBindTexture(GL_TEXTURE_CUBE_MAP, hdrCubemap->getTexHandle());
+		glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+
+		programForHDR2Cubemap->unbind();
+
+		// pbr: create an irradiance cubemap, and re-scale capture FBO to irradiance scale.
+    	// --------------------------------------------------------------------------------
+		irradianceCubemap =  std::make_shared<Texture>();
+		int w = 32, h = 32;
+		irradianceCubemap->createIrradianceCubemap(w, h);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, w, h);
+
+		// pbr: solve diffuse integral by convolution to create an irradiance (cube)map.
+		// -----------------------------------------------------------------------------
+		// programForIrradianceGen->addTexture("environmentMap", hdrCubemap->getTexHandle());
+
+		programForIrradianceGen->setUniformMat4fv("projection", captureProjection);
+		programForIrradianceGen->bind();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, hdrCubemap->getTexHandle());
+		glViewport(0, 0, w, h); // don't forget to configure the viewport to the capture dimensions.
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		for (unsigned int i = 0; i < 6; ++i)
+		{
+			glUniformMatrix4fv(programForIrradianceGen->getUniformLocation("view"), 1, GL_FALSE, &captureViews[i][0][0]);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,  irradianceCubemap->getTexHandle(), 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			renderUnitCube();
+		}
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		programForIrradianceGen->unbind();
+
+		// pbr: create a pre-filter cubemap, and re-scale capture FBO to pre-filter scale.
+		// --------------------------------------------------------------------------------
+		prefilterCubemap = std::make_shared<Texture>();
+		prefilterCubemap->createPrefilterCubemap(texWeight/4, texHeight/4);
+
+		programForPrefilterGen->setUniformMat4fv("projection", captureProjection);
+		programForPrefilterGen->addCubeMap("environmentMap", hdrCubemap->getTexHandle());
+
+		programForPrefilterGen->bind();
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+
+		unsigned int maxMipLevels = 5;
+		for (unsigned int mip = 0; mip < maxMipLevels; ++mip)
+		{
+			// reisze framebuffer according to mip-level size.
+			unsigned int mipWidth  = static_cast<unsigned int>(texWeight/4 * std::pow(0.5, mip));
+			unsigned int mipHeight = static_cast<unsigned int>(texHeight/4 * std::pow(0.5, mip));
+			glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
+			glViewport(0, 0, mipWidth, mipHeight);
+
+			float roughness = (float)mip / (float)(maxMipLevels - 1);
+			glUniform1f(programForPrefilterGen->getUniformLocation("roughness"), roughness);
+			for (unsigned int i = 0; i < 6; ++i)
+			{
+				glUniformMatrix4fv(programForPrefilterGen->getUniformLocation("view"), 1, GL_FALSE, &captureViews[i][0][0]);
+				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, prefilterCubemap->getTexHandle(), mip);
+
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				renderUnitCube();
+			}
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+		// pbr: generate a 2D LUT from the BRDF equations used.
+		// ----------------------------------------------------
+		glGenTextures(1, &brdfLUTTexture);
+
+		// pre-allocate enough memory for the LUT texture.
+		glBindTexture(GL_TEXTURE_2D, brdfLUTTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RG16F, 512, 512, 0, GL_RG, GL_FLOAT, 0);
+		// be sure to set wrapping mode to GL_CLAMP_TO_EDGE
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		// then re-configure capture framebuffer object and render screen-space quad with BRDF shader.
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUTTexture, 0);
+
+		
+		programForLUTGen->bind();
+		glViewport(0, 0, 512, 512);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		renderQuad();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	bool GLExample::sceneInit(){
@@ -465,6 +626,13 @@ namespace cgCourse
 		skyBosxtex = std::make_shared<Texture>();
 		skyBosxtex->loadCubemap(faces);
 
+		hdrtex = std::make_shared<Texture>();
+		hdrtex->loadHDR(std::string(SKY_DIR) + "/studio_2k.hdr");
+		//hdrtex->loadHDR(std::string(SKY_DIR) + "/snowy_cabin.jpg");
+		int hdr_weight = 512, hdr_height = 512;
+		glDepthFunc(GL_LEQUAL);
+		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+		creatHDRCubemap(hdrtex, hdr_weight, hdr_height);
 
 		ground = std::make_shared<Cube>();
 		if(!ground->createVertexArray(0, 1, 2, 3, 4))
@@ -548,7 +716,7 @@ namespace cgCourse
 		lightboxes.back()->setScaling(glm::vec3(0.05, 0.05, 0.05));
 
 		lights.push_back(LightInfo());
-        lights.back().radiance = glm::vec3(1.7, 1.7, 1.7);
+        lights.back().radiance = glm::vec3(0.7, 0.7, 0.7);
         lights.back().position = glm::vec3(15.0, 4.0, -8.0);
 
 		lightboxes.push_back(std::make_shared<Cube>());
@@ -647,7 +815,8 @@ namespace cgCourse
 			ImGui::SliderFloat("X", &fufu.objectPosition.x, -10.0f, 10.0f, "%.2f");
 			ImGui::SliderFloat("Y", &fufu.objectPosition.y, -15.0f, 10.0f, "%.2f");
 			ImGui::SliderFloat("Z", &fufu.objectPosition.z, -10.0f, 10.0f, "%.2f");
-
+			ImGui::SliderFloat("Roughness", &defaultRoughness, 0.f, 1.f, "%.2f");
+			ImGui::SliderFloat("Metalness", &defaultMetalness, 0.f, 1.f, "%.2f");
 			ImGui::End();
 		}
 
@@ -737,18 +906,18 @@ namespace cgCourse
 		}
 
 		
-		
-
 		{
 			ImGui::Begin("Rendering Controll");
 			ImGui::Text("model: ");
 			ImGui::Checkbox("Model Normal", &showNormal);
 			ImGui::Text("shading: ");
-			ImGui::Checkbox("Diffuse Term", &showDiffuseTerm);
-			ImGui::Checkbox("SpecularTerm Term", &showSpecular);
+			ImGui::Checkbox("Environment Light", &isEnvironmentLight);
+			ImGui::SliderFloat("", &envIntensity, 0.0, 2.0, "%.2f");
+			
+			ImGui::Checkbox("Direct Light", &isDirectLight);
 			ImGui::Checkbox("Colormap", &showColor);
-			ImGui::Text("Ambient factor(Enviorment)");
-			ImGui::SliderFloat(" ", &ambientFactor, 0, 1.0f, "%.1f");
+			ImGui::Text("IBL: ");
+			ImGui::Checkbox("IBL", &isIBL);
 			ImGui::End();
 		}
 
@@ -834,7 +1003,7 @@ namespace cgCourse
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 	}
 
-	void GLExample::renderSkybox(){
+	void GLExample::renderSkybox(const GLuint id){
 		
 		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 		glm::mat4 view = glm::mat4(glm::mat3(cam.getViewMatrix())); // remove translation from the view matrix
@@ -842,10 +1011,11 @@ namespace cgCourse
 
 		programForSkybox->setUniformMat4fv("view", view);
 		programForSkybox->setUniformMat4fv("projection", projection);
+		programForSkybox->setUniformf("envIntensity", envIntensity);
 
         programForSkybox->bind();
 		glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, skyBosxtex->getTexHandle());
+		glBindTexture(GL_TEXTURE_CUBE_MAP, id);
         // skybox cube
 		skybox->draw();
  		glDepthFunc(GL_LESS); // set depth function back to default
@@ -942,6 +1112,76 @@ namespace cgCourse
 		}
 		
 		programForLightBox->unbind();
+	}
+
+	void GLExample::renderUnitCube(){
+		// initialize (if necessary)
+		if (unitCubeVAO == 0)
+		{
+			float vertices[] = {
+				// back face
+				-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+				1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+				1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right         
+				1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+				-1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+				-1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
+				// front face
+				-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+				1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
+				1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+				1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+				-1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
+				-1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+				// left face
+				-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+				-1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
+				-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+				-1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+				-1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+				-1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+				// right face
+				1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+				1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+				1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right         
+				1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+				1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+				1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left     
+				// bottom face
+				-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+				1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
+				1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+				1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+				-1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+				-1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+				// top face
+				-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+				1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+				1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right     
+				1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+				-1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+				-1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left        
+			};
+			glGenVertexArrays(1, &unitCubeVAO);
+			glGenBuffers(1, &unitCubeVBO);
+			// fill buffer
+			glBindBuffer(GL_ARRAY_BUFFER, unitCubeVBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			// link vertex attributes
+			glBindVertexArray(unitCubeVAO);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindVertexArray(0);
+		}
+		// render Cube
+		glBindVertexArray(unitCubeVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
 	}
 
 	bool GLExample::end()

@@ -82,9 +82,11 @@ namespace cgCourse
 		void renderGround(const std::shared_ptr<ShaderProgram> & program);
 		void renderPlane(const GLuint id);
 		void renderQuad();
+		void creatHDRCubemap(std::shared_ptr<Texture> hrdTex, int texWeight, int texHeight);
+		void renderUnitCube();
 		
 		// void renderPlane();
-		void renderSkybox();
+		void renderSkybox(const GLuint id);
 		void updateGUI();
 		void processInput(GLFWwindow* window);
 		unsigned int loadCubemap(std::vector<std::string>& faces);
@@ -102,6 +104,10 @@ namespace cgCourse
 		std::shared_ptr<ShaderProgram> programForDeferLighting;
 		std::shared_ptr<ShaderProgram> programForSSAO;
 		std::shared_ptr<ShaderProgram> programForSSAOBlur;
+		std::shared_ptr<ShaderProgram> programForHDR2Cubemap;
+		std::shared_ptr<ShaderProgram> programForIrradianceGen;
+		std::shared_ptr<ShaderProgram> programForPrefilterGen;
+		std::shared_ptr<ShaderProgram> programForLUTGen;
 
 		std::shared_ptr<ComputingShaderProgram> programForSAT;
 
@@ -128,7 +134,14 @@ namespace cgCourse
 		std::shared_ptr<Texture> torustex;
 		std::shared_ptr<Texture> torustexSpec;
         std::shared_ptr<Texture> torustexNormal;
+
 		std::shared_ptr<Texture> skyBosxtex;
+		std::shared_ptr<Texture> hdrtex;
+		std::shared_ptr<Texture> hdrCubemap;
+		std::shared_ptr<Texture> irradianceCubemap;
+
+		std::shared_ptr<Texture> prefilterCubemap;
+		
 
 		float animation = 0;
 		LightMotionMode animationDir = Forward;
@@ -141,18 +154,24 @@ namespace cgCourse
 		unsigned int gPosition, gNormal, gAlbedoSpec, gRough;
 		unsigned int quadVAO = 0, quadVBO;
 
+		unsigned int brdfLUTTexture;
+
+		unsigned int unitCubeVAO = 0, unitCubeVBO;
 
 		glm::vec3 lightboxColor;
 		glm::mat4 mvpMatrix = glm::mat4(1);
 
 		bool isPBR = true;
 		bool isDefer = false;
+		bool isIBL = true;
 		bool drawTorusNormals = false;
 		bool disPlay_shadowMap = true;
 		unsigned int PCF_samples = 3;
 		unsigned int shadowType=2;
 		float lightSize = 5.5;
 		float ambientFactor = 0.4;
+		float defaultRoughness = 0.7;
+		float defaultMetalness = 0.08;
 
 		LightInfo light;
 		std::vector<LightInfo> lights;
@@ -177,9 +196,12 @@ namespace cgCourse
 		int deferRenderOutput = 0;
 		
 		bool showNormal = false;
-		bool showDiffuseTerm = true;
+		bool isEnvironmentLight = true;
 		bool showColor = true;
+		bool isDirectLight = true;
 		bool showSpecular = true;
+		bool showDiffuseTerm = true;
+		float envIntensity = 1.0;
 	};
 }
 

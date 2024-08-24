@@ -19,6 +19,7 @@ namespace cgCourse
 		void bind() const;
 		void unbind() const;
 		void addTexture(std::string _textureVarName, unsigned int _handle);
+		void addCubeMap(std::string _textureVarName, unsigned int _handle);
         void clearTextures();
 		
 		GLuint getUniformLocation(const std::string& _uniformName) const;
@@ -43,7 +44,8 @@ namespace cgCourse
         std::map<std::string,float> uniformsf;
         std::map<std::string,int> uniformsi;
         std::map<std::string,glm::vec2> uniforms2fv;
-        std::map<std::string,unsigned int> uniformBlockBuffers;
+        std::map<std::string, unsigned int> uniformBlockBuffers;
+		std::map<std::string, unsigned int> cubeMaps;
 
 	};
 }

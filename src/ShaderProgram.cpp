@@ -99,9 +99,9 @@ namespace cgCourse
 		return true;
 	}
 
-    GLuint ShaderProgram::getUniformLocation(const std::string& _uniformName) const {
+    GLuint ShaderProgram::getUniformLocation(const std::  string& _uniformName) const {
 		if(glGetUniformLocation(program, _uniformName.c_str()) == -1){
-			// std::cout <<"shader: "<<program <<" Warning: uniform " << _uniformName << " doesn't exist!" << std::endl;
+			//std::cout <<"shader: "<<program <<" Warning: uniform " << _uniformName << " doesn't exist!" << std::endl;
 		}
         return glGetUniformLocation(program, _uniformName.c_str());
     }
@@ -113,6 +113,7 @@ namespace cgCourse
 
     void ShaderProgram::bind() const {
         glUseProgram(program);
+		
 
         int c = 0;
         for (auto &t:textures){
@@ -121,6 +122,13 @@ namespace cgCourse
             glUniform1i(getUniformLocation(t.first), c);
             c++;
         }
+		for (auto &t:cubeMaps){
+            glActiveTexture(GL_TEXTURE0 + c);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, t.second);
+            glUniform1i(getUniformLocation(t.first), c);
+            c++;
+        }
+
         for (auto &u:uniforms3fv){
             glUniform3fv(getUniformLocation(u.first), 1, &u.second[0]);
         }
@@ -163,6 +171,18 @@ namespace cgCourse
         else
             textures.insert(std::pair<std::string,unsigned int>(_textureVarName,_handle));
 	}
+
+	void ShaderProgram::addCubeMap(std::string _textureVarName, unsigned int _handle){
+        std::map<std::string,unsigned int>::iterator it = cubeMaps.find(_textureVarName);
+        if (it != cubeMaps.end()){
+			//std::cout<<_textureVarName<<"is haved, renew to "<< _handle<<std::endl;
+			it->second = _handle;
+		}
+            
+        else
+            cubeMaps.insert(std::pair<std::string,unsigned int>(_textureVarName,_handle));
+	}
+	
 
 	void ShaderProgram::clearTextures(){
         textures.clear();

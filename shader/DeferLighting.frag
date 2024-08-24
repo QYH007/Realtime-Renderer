@@ -24,11 +24,12 @@ uniform sampler2D gAlbedoSpec;
 uniform sampler2D gRough;
 uniform sampler2D ssao;
 
+uniform samplerCube irradianceMap;
+
 uniform int useDiffuseTexture;
 
 // uniform float ambientFactor;
 float ambientFactor = 0.6;
-uniform int showNormal;
 uniform int showDiffuseTerm;
 uniform int showColor;
 uniform int showSpecular;
@@ -38,6 +39,7 @@ uniform int useMetalnessMap;
 uniform int useRoughnessMap;
 uniform int useNormalMap;
 
+uniform int isIBL;
 
 
 struct Light {
@@ -115,18 +117,38 @@ void main()
         float AmbientOcclusion = texture(ssao, TexCoords).r;
     
         vec3 F0 = mix(Fdielectric, albedo, metalness);
+
+        vec3 viewDirection  = normalize( - FragPos);
                 
         // then calculate lighting as usual
-        vec3 directLighting = albedo * ambientFactor * (1.0 - roughness) * AmbientOcclusion;
+        vec3 directLighting = vec3(0,0,0);
+
+        if(isIBL == 1){
+
+            // sampling,using world normal
+            mat3 viewMatrix3x3 = mat3(viewMatrix);           // 提取视图矩阵的上3x3部分
+            mat3 invViewMatrix3x3 = transpose(viewMatrix3x3); // 计算视图矩阵的逆转置矩阵
+            vec3 worldNormal = normalize(invViewMatrix3x3 * normal); // 转换为世界空间法线
+            vec3 irradiance = texture(irradianceMap, worldNormal).rgb;
+            // ambient lighting (we now use IBL as the ambient term)
+            vec3 kS = fresnelSchlick(F0, max(dot(normal, viewDirection), 0.0));
+            vec3 kD = 1.0 - kS;
+            kD *= 1.0 - metalness;
+            
+            vec3 diffuse = irradiance * albedo;
+            directLighting = (kD * diffuse);
+        }else{
+            // 简单的环境光照模拟，就是自身颜色的一个反应，跟粗糙度有关，正常来说会更复杂。
+            directLighting = albedo * ambientFactor * (1.0 - roughness);
+        }
 
         vec3 Lh; // 光源的半程向量
         vec3 lightDir; // 光源方向
         vec3 F;
         vec3 Lradiance;
 
-        vec3 viewDirection  = normalize( - FragPos);
-
         
+
         for(int i = 0; i < NR_LIGHTS; ++i)
         {
             // calculate distance between light source and current fragment
@@ -166,7 +188,8 @@ void main()
 
                 directLighting += (diffuseTerm + specularTerm) * lights[i].Color * manyLightIntensity * NdotL;
             }
-        }    
+        }
+
         FragColor = vec4(directLighting, 1.0);
         //FragColor = vec4(metalness, metalness, metalness, 1.0);
     } 

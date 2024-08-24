@@ -223,12 +223,13 @@ namespace cgCourse
 		// 
 		_shaderProgram->bind();
 
-		if (_updateVMP){
-            auto mvpMatrix = _projectionMatrix * _viewMatrix * this->getModelMatrix();
-            glUniformMatrix4fv(_shaderProgram->getUniformLocation("modelMatrix"), 1, GL_FALSE, &this->getModelMatrix()[0][0]);
-            glUniformMatrix4fv(_shaderProgram->getUniformLocation("viewMatrix"), 1, GL_FALSE, &_viewMatrix[0][0]);
-            glUniformMatrix4fv(_shaderProgram->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
-        }
+		// if (_updateVMP){
+        //     auto mvpMatrix = _projectionMatrix * _viewMatrix * this->getModelMatrix();
+        //     glUniformMatrix4fv(_shaderProgram->getUniformLocation("modelMatrix"), 1, GL_FALSE, &this->getModelMatrix()[0][0]);
+        //     glUniformMatrix4fv(_shaderProgram->getUniformLocation("viewMatrix"), 1, GL_FALSE, &_viewMatrix[0][0]);
+        //     glUniformMatrix4fv(_shaderProgram->getUniformLocation("mvpMatrix"), 1, GL_FALSE, &mvpMatrix[0][0]);
+        // }
+        
 		// binding vao
 		glBindVertexArray(vaoID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);

@@ -84,6 +84,8 @@ namespace cgCourse
 		programForIrradianceGen = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/IrradianceGen");
 		programForPrefilterGen 	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/PrefilterGen");
 		programForLUTGen 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/LUTGen");
+		programForOutline 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Outline");
+		programForCartoon		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Cartoon");
 		
 		programForSAT 			= std::make_shared<ComputingShaderProgram>(std::string(SHADER_DIR) + "/ComputeSAT");
 		programForSAT->bind();
@@ -409,29 +411,38 @@ namespace cgCourse
 			//renderPlane(shadows[0].depthMap);
 			//renderPlane(skyBosxtex->getTexHandle());
 			renderPlane(brdfLUTTexture);
-		if(isPBR){
+
+		if(!isCartoon){
 			addMultipleLightVariables(programForPBR);
 			addShadowVariables(programForPBR, lightSpaceMatrixes);
+			addForwardVariables(programForPBR);
+
+			renderGround(programForPBR);
+			programForPBR->setUniformi("useDiffuseTexture", 1);
+			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
+			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
+			octopus.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
+
+		}else{
+			addMultipleLightVariables(programForCartoon);
+			addShadowVariables(programForCartoon, lightSpaceMatrixes);
+			addForwardVariables(programForCartoon);
+
+			renderGround(programForCartoon);
+			programForCartoon->setUniformi("useDiffuseTexture", 1);
+			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForCartoon);
+			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForCartoon);
+			octopus.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForCartoon);
+
+			glEnable(GL_CULL_FACE);
+			glCullFace(GL_FRONT);
+			programForOutline->setUniformi("outlineWidth", outlineWidth);
+			programForOutline->setUniform3fv("camPos", cam.getPosition());
+			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForOutline);
+			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForOutline);
+			octopus.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForOutline);
+			glDisable(GL_CULL_FACE);
 		}
-		programForPBR->addTexture("brdfLUT", brdfLUTTexture);
-		programForPBR->addCubeMap("irradianceMap", irradianceCubemap->getTexHandle());
-		programForPBR->addCubeMap("prefilterMap", prefilterCubemap->getTexHandle());
-		programForPBR->setUniformi("isIBL", isIBL);
-		programForPBR->setUniformf("defaultRoughness", defaultRoughness);
-		programForPBR->setUniformf("defaultMetalness", defaultMetalness);
-		programForPBR->setUniformf("envIntensity", envIntensity);
-		renderCubes(lightSpaceMatrixes);
-		renderGround(programForPBR);
-
-		programForPBR->setUniformi("useDiffuseTexture", 1);
-		programForPBR->setUniformi("showNormal", showNormal);
-		programForPBR->setUniformi("isEnvironmentLight", isEnvironmentLight);
-		programForPBR->setUniformi("isDirectLight", isDirectLight);
-		programForPBR->setUniformi("showColor", showColor);
-		
-
-		gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
-		fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForPBR);
 	}
 
 	bool GLExample::render()
@@ -693,6 +704,12 @@ namespace cgCourse
         fufu.setPosition(glm::vec3(-1, -10, 1));
 		fufu.setRotation(180, glm::vec3(0, 1, 0));
 
+		// ========================octopus=============
+		octopus.load(std::string(RES_DIR) + "/fufu/", "octopus.pmx", false, false, false);
+		octopus.setScaling(glm::vec3(0.2, 0.2, 0.2));
+        octopus.setPosition(glm::vec3(4, 3, -2));
+		octopus.setRotation(180, glm::vec3(0, 1, 0));
+
 		float aspect_ratio = float(_windowSize.y) / _windowSize.x;
 		screenPlane = std::make_shared<ScreenPlane>(1- 0.5*aspect_ratio, 0.5f, 1.0f ,1.0f);
 
@@ -807,6 +824,7 @@ namespace cgCourse
 			ImGui::Begin("Center control");
 				
 			ImGui::Checkbox("Deferred Rendering", &isDefer);
+
 			ImGui::End();
 		}
 		{
@@ -908,16 +926,16 @@ namespace cgCourse
 		
 		{
 			ImGui::Begin("Rendering Controll");
+			ImGui::Checkbox("Cartoon Rendering", &isCartoon);
 			ImGui::Text("model: ");
 			ImGui::Checkbox("Model Normal", &showNormal);
 			ImGui::Text("shading: ");
+			ImGui::Checkbox("IBL", &isIBL);
 			ImGui::Checkbox("Environment Light", &isEnvironmentLight);
 			ImGui::SliderFloat("", &envIntensity, 0.0, 2.0, "%.2f");
-			
 			ImGui::Checkbox("Direct Light", &isDirectLight);
 			ImGui::Checkbox("Colormap", &showColor);
-			ImGui::Text("IBL: ");
-			ImGui::Checkbox("IBL", &isIBL);
+			ImGui::SliderInt("Outline Width", &outlineWidth, 1, 10);
 			ImGui::End();
 		}
 
@@ -927,7 +945,7 @@ namespace cgCourse
 		// {
 		// 	ImGui::Begin("PBR Debuger");
 				
-		// 	ImGui::Checkbox("PBR", &isPBR);
+		// 	ImGui::Checkbox("PBR", &isCartoon);
 		// 	// 	ImGui::SliderFloat("Yaw", &cam.Yaw, -180.0f, 180.0f);
 		// 	ImGui::End();
 		// }
@@ -985,6 +1003,8 @@ namespace cgCourse
 		gun.draw();
 		glUniformMatrix4fv(programForShadows->getUniformLocation("modelMatrix"), 1, GL_FALSE, &fufu.getModelMatrix()[0][0]);
 		fufu.draw();
+		glUniformMatrix4fv(programForShadows->getUniformLocation("modelMatrix"), 1, GL_FALSE, &octopus.getModelMatrix()[0][0]);
+		octopus.draw();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		
@@ -1067,6 +1087,21 @@ namespace cgCourse
 		}
 	}
 
+	void GLExample::addForwardVariables(const std::shared_ptr<ShaderProgram> & program){
+		program->addTexture("brdfLUT", brdfLUTTexture);
+		program->addCubeMap("irradianceMap", irradianceCubemap->getTexHandle());
+		program->addCubeMap("prefilterMap", prefilterCubemap->getTexHandle());
+		program->setUniformi("isIBL", isIBL);
+		program->setUniformf("defaultRoughness", defaultRoughness);
+		program->setUniformf("defaultMetalness", defaultMetalness);
+		program->setUniformf("envIntensity", envIntensity);
+		program->setUniformi("useDiffuseTexture", 1);
+		program->setUniformi("showNormal", showNormal);
+		program->setUniformi("isEnvironmentLight", isEnvironmentLight);
+		program->setUniformi("isDirectLight", isDirectLight);
+		program->setUniformi("showColor", showColor);
+	}
+
 	void GLExample::renderGround(const std::shared_ptr<ShaderProgram> & program){
 
 			mvpMatrix = cam.getViewProjectionMatrix() * ground->getModelMatrix();
@@ -1080,7 +1115,7 @@ namespace cgCourse
 
 	void GLExample::renderCubes(const std::vector<glm::mat4> & lightSpaceMatrixes)
 	{
-		if(isPBR){
+		if(isCartoon){
 			
 			mvpMatrix = cam.getViewProjectionMatrix() * cube->getModelMatrix();
 			programForPBR->setUniformMat4fv("mvpMatrix", mvpMatrix);

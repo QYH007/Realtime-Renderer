@@ -316,7 +316,8 @@ float compute_softshadow_VSSM(sampler2D DepthMap, sampler2D DepthSAT, vec3 norma
 void main()
 {
     // -------------------read texture-----------------
-	vec3 albedo = objectColor;
+	//vec3 albedo = objectColor;
+    vec3 albedo = vec3(0.8, 0.5, 0.5);
     float metalness = defaultMetalness;
     float roughness = defaultRoughness;
     vec3 normal = worldObjectNormal;

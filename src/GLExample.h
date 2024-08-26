@@ -65,7 +65,6 @@ namespace cgCourse
 		bool end() override;
 		// Camera cam;
 		
-
 		void imgui() override {};
 
 	private:
@@ -75,6 +74,7 @@ namespace cgCourse
 		void addLightVariables(const std::shared_ptr<ShaderProgram>& _program);
 		void addMultipleLightVariables(const std::shared_ptr<ShaderProgram>& _program);
 		void addShadowVariables(const std::shared_ptr<ShaderProgram>& _program,const std::vector<glm::mat4> & lightSpaceMatrixes);
+		void addForwardVariables(const std::shared_ptr<ShaderProgram>& _program);
 		void renderLightBox(bool isManyLight);
 		void computeSAT(const ShadowMapping & shadow);
 		void renderCubes(const std::vector<glm::mat4> & lightSpaceMatrixes);
@@ -108,6 +108,8 @@ namespace cgCourse
 		std::shared_ptr<ShaderProgram> programForIrradianceGen;
 		std::shared_ptr<ShaderProgram> programForPrefilterGen;
 		std::shared_ptr<ShaderProgram> programForLUTGen;
+		std::shared_ptr<ShaderProgram> programForCartoon;
+		std::shared_ptr<ShaderProgram> programForOutline;
 
 		std::shared_ptr<ComputingShaderProgram> programForSAT;
 
@@ -118,6 +120,7 @@ namespace cgCourse
 		
 		Model gun;
 		Model fufu;
+		Model octopus;
 
 		std::shared_ptr<ScreenPlane> screenPlane;
 		std::shared_ptr<Skybox> skybox;
@@ -161,7 +164,7 @@ namespace cgCourse
 		glm::vec3 lightboxColor;
 		glm::mat4 mvpMatrix = glm::mat4(1);
 
-		bool isPBR = true;
+		bool isCartoon = false;
 		bool isDefer = false;
 		bool isIBL = true;
 		bool drawTorusNormals = false;
@@ -172,6 +175,7 @@ namespace cgCourse
 		float ambientFactor = 0.4;
 		float defaultRoughness = 0.7;
 		float defaultMetalness = 0.08;
+		int outlineWidth = 2;
 
 		LightInfo light;
 		std::vector<LightInfo> lights;

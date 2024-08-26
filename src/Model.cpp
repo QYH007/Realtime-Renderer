@@ -42,7 +42,7 @@ namespace cgCourse{
         
         // Now we can access the file's contents.
         scene->mMeshes;
-        std::cout<<scene->mRootNode->mNumMeshes<<" "<<scene->mRootNode->mNumChildren<<std::endl;
+        //std::cout<<scene->mRootNode->mNumMeshes<<" "<<scene->mRootNode->mNumChildren<<std::endl;
         // for(int i =0; i < scene->mNumMeshes; i++){
         //      std::cout<<"no."<<i<<" mesh, name: "<<scene->mMeshes[i]->mName.C_Str() << "   使用的材质为 "<<scene->mMeshes[i]->mMaterialIndex<<std::endl;
         // }
@@ -70,6 +70,10 @@ namespace cgCourse{
                     }
                     else 
                         path2textures.push_back(s);
+                }else if(_file == "octopus.pmx"){
+                    if(i == 0){
+                        path2textures.push_back("tex/octopus.png");
+                    }
                 }else{
                     path2textures.push_back(s);
                 }
@@ -144,7 +148,9 @@ namespace cgCourse{
             //std::cout<<"index: "<<  mesh->mName.C_Str() <<" should use:"<<path2textures[mesh->mMaterialIndex]<< std::endl;
             if(_file == "fufu.pmx")
                 element->getMaterial()->diffuseTexture->loadFromFile( _path + path2textures[mesh->mMaterialIndex], true);
-            else {
+            else if(_file == "octopus.pmx"){
+                element->getMaterial()->diffuseTexture->loadFromFile( _path + path2textures[mesh->mMaterialIndex], true);
+            }else{
                 aiString subpath;
                 scene->mMaterials[mesh->mMaterialIndex]->GetTexture(aiTextureType_DIFFUSE, 0, &subpath);
                 element->getMaterial()->diffuseTexture->loadFromFile( _path + subpath.C_Str(), true);
@@ -170,6 +176,8 @@ namespace cgCourse{
             _shaderProgram->setUniformMat4fv("mvpMatrix", mvpMatrix);
             _shaderProgram->setUniformMat4fv("viewMatrix", _viewMatrix);
             _shaderProgram->setUniformMat4fv("modelMatrix", getModelMatrix());
+            _shaderProgram->setUniformMat4fv("projectionMatrix", _projectionMatrix);
+
             for (auto &e:elements){
                 e->draw(_projectionMatrix, _viewMatrix, _shaderProgram, false, getMaterial());
             }

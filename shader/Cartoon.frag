@@ -1,4 +1,4 @@
-#version 460 core
+﻿#version 460 core
 
 // --------------------------- constant variables-----------------------------------
 #define EPS 1e-3
@@ -13,7 +13,6 @@
 const int NumLights = 2;
 const float gamma     = 2.2;
 const float pureWhite = 1.0;
-const float ambientFactor = 0.1;
 
 // Constant normal incidence Fresnel factor for all dielectrics.
 const vec3 Fdielectric = vec3(0.04);
@@ -25,6 +24,7 @@ in vec3 objectColor;
 in vec3 worldPos;
 in vec2 texCoord;
 in vec3 objectNormal;
+in vec3 worldObjectNormal;
 in mat3 tbn;
 
 
@@ -33,11 +33,17 @@ uniform sampler2D shapetex;
 uniform sampler2D shapetexSpec;
 uniform sampler2D shapetexNormal;
 
+// PBR
 uniform sampler2D diffuseTexture;
 uniform sampler2D normalTexture;
 uniform sampler2D specTexture;
 uniform sampler2D metalnessTexture;
 uniform sampler2D roughnessTexture;
+
+// IBL
+uniform samplerCube irradianceMap;
+uniform samplerCube prefilterMap;
+uniform sampler2D brdfLUT;
 
 
 uniform sampler2D u_DepthMap[NumLights];     //R: shadow map, G: squared shadow map
@@ -50,6 +56,24 @@ uniform int PCF_samples;
 uniform vec3 camPos;
 uniform mat4 lightSpaceMatrixes[NumLights];
 uniform int useDiffuseTexture;
+
+uniform float envIntensity;
+uniform float defaultRoughness;
+uniform float defaultMetalness;
+
+
+uniform int showNormal;
+uniform int isEnvironmentLight;
+uniform int showColor;
+uniform int isDirectLight;
+
+uniform int useAlbedoMap;
+uniform int useMetalnessMap;
+uniform int useRoughnessMap;
+uniform int useNormalMap;
+
+uniform int isIBL;
+
 
 // -------------------------- struct -------------------------
 uniform struct Light
@@ -71,15 +95,21 @@ struct AnalyticalLight {
 uniform AnalyticalLight lights[NumLights];
 
 // -------------------------- OUT -------------------------
-//out vec3 color;
-layout(location=0) out vec4 color;
+
+layout(location=0) out vec4 Fragcolor;
 
 
 /*******-------------------- PBR functions --------------------******/
+// F
 vec3 fresnelSchlick(vec3 F0, float cosTheta)
 {
     return F0 + (vec3(1.0) - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
 }
+
+vec3 fresnelSchlickRoughness(vec3 F0, float cosTheta,  float roughness)
+{
+    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
+} 
 
 // D
 float DistributionGGX(vec3 N, vec3 H, float a)
@@ -135,7 +165,7 @@ float compute_shadow(sampler2D DepthMap, vec3 normal, vec3 lightDir)
     else
     {
         float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.005);
-        //float bias = 0.00;
+       // float bias = 0.00;
 
         if (texture(DepthMap, projCoords.xy).r > projCoords.z - bias)
         {
@@ -164,7 +194,8 @@ float compute_shadow_PCF(sampler2D u_DepthMap, vec3 normal, vec3 lightDir)
 
     // Get texel size for shadow map
     vec2 texelSize = 1.0 / textureSize(u_DepthMap, 0);
-    float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.005);
+    float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.01);
+	//bias = 0;
 
     // Perform PCF by sampling neighboring texels
     for (int x = -PCF_samples; x <= PCF_samples; x++) {
@@ -223,7 +254,7 @@ float chebyshev(vec2 moments, float currentDepth) {
 
 float compute_softshadow_VSSM(sampler2D DepthMap, sampler2D DepthSAT, vec3 normal, vec3 lightDir)
 {
-	float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.005);
+	float bias = max(0.001 * (1.0 - dot(normal, lightDir)), 0.001);
     //float bias = 0;
 
 	vec3 projCoords = posLightSpace.xyz / posLightSpace.w;
@@ -233,9 +264,10 @@ float compute_softshadow_VSSM(sampler2D DepthMap, sampler2D DepthSAT, vec3 norma
 
 	// get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
 	float closestDepth = texture(DepthMap, projCoords.xy).r;
-
+	
 	float blockerSearchSize = light.lightSize/2.0f;
 	float currentDepth = projCoords.z - bias;
+
 
 	// keep the shadow at 1.0 when outside the zFar region of the light's frustum.
 	if (currentDepth > 1.0) {
@@ -284,36 +316,69 @@ float compute_softshadow_VSSM(sampler2D DepthMap, sampler2D DepthSAT, vec3 norma
 void main()
 {
     // -------------------read texture-----------------
-    vec3 albedo = objectColor;
-    float metalness = 0.0;
-    float roughness = 0.1;
-    vec3 normal = objectNormal;
+	vec3 albedo = objectColor;
+    float metalness = defaultMetalness;
+    float roughness = defaultRoughness;
+    vec3 normal = worldObjectNormal;
+    vec3 F0 = vec3(1.0);
+
+    
     if(useDiffuseTexture == 1){
-        albedo = texture(diffuseTexture, texCoord).rgb;
-        metalness = texture(metalnessTexture, texCoord).r;
-        roughness = texture(roughnessTexture, texCoord).r;
-        normal = texture(normalTexture, texCoord.xy).rgb;
-        normal = normalize(normal * 2.0 - 1.0);
-        normal = normalize(tbn * normal);
-        
+        if(useAlbedoMap == 1 && showColor == 1)
+            albedo = texture(diffuseTexture, texCoord).rgb;
+        if(useMetalnessMap == 1)
+		    metalness = texture(metalnessTexture, texCoord).r;
+            
+        if(useRoughnessMap == 1)
+            roughness = texture(roughnessTexture, texCoord).r;
+            
+        if(useNormalMap == 1){
+            normal = texture(normalTexture, texCoord.xy).rgb;
+            normal = normalize(normal * 2.0 - 1.0);
+            normal = normalize(tbn * normal);
+        }
     }
+
+    F0 = mix(Fdielectric, albedo, metalness);
+    
 
     // ------------- vectors --------------
     vec3 viewDirection = normalize(camPos - worldPos);
-
-    // 金属度插值，要么非金属，要么纯金属
-    vec3 F0 = mix(Fdielectric, albedo, metalness);
-
-    // 简单的环境光照模拟，就是自身颜色的一个反应，跟粗糙度有关，正常来说会更复杂。
-    vec3 directLighting = albedo * ambientFactor * (1.0 - roughness);
-
     vec3 Lh; // 光源的半程向量
     vec3 lightDir; // 光源方向
+
+    vec3 reflectDir = reflect(-viewDirection, normal); // 视线的反射方向
+
+    // shading begin
+    // 金属度插值，要么非金属，要么纯金属
+    vec3 ambient = vec3(0,0,0);
+    vec3 Lo = vec3(0,0,0);
+    vec3 specular = vec3(0,0,0);
+
+    // ambient term
+ 
+    // ambient lighting (we now use IBL as the ambient term)
+    vec3 kS = fresnelSchlickRoughness(F0, max(dot(normal, viewDirection), 0.0), roughness);
+    vec3 kD = 1.0 - kS;
+    kD *= 1.0 - metalness;
+
+    vec3 irradiance = texture(irradianceMap, normal).rgb;
+    vec3 diffuse = irradiance * albedo;
+
+    // sample both the pre-filter map and the BRDF lut and combine them together as per the Split-Sum approximation to get the IBL specular part.
+    const float MAX_REFLECTION_LOD = 4.0;
+    //
+    vec3 prefilteredColor = textureLod(prefilterMap, reflectDir, roughness * MAX_REFLECTION_LOD).rgb;    
+    vec2 brdf  = texture(brdfLUT, vec2(max(dot(normal, viewDirection), 0.0), roughness)).rg;
+    specular = prefilteredColor * (kS * brdf.x + brdf.y);
+
+    ambient = (kD * diffuse + specular) * envIntensity;
+    
+    
     vec3 F; 
     float shadow = 1.0;
     vec3 Lradiance;
-
-    // 对每一个光源做累加计算
+	// 对每一个光源做累加计算
     for (int i=0; i<NumLights; ++i)
     {
         posLightSpace = lightSpaceMatrixes[i] * vec4(worldPos, 1);
@@ -360,23 +425,41 @@ void main()
             shadow = 1.0;
         }
 
-        directLighting += (diffuseTerm + specularTerm) * Lradiance * NdotL * shadow;
+
+        Lo += (diffuseTerm + specularTerm) * Lradiance * NdotL * shadow;
         // END TODO
     }
 
-    // color = vec4(lightDir,1.0);
-	// color = vec4(directLighting, 1.0);
-    // color = vec4(shadow*Lradiance, 1.0);
+
+    vec3 color = vec3(0,0,0);
+    if(isEnvironmentLight == 1){
+        if(isIBL == 1)
+            color += ambient;
+        else
+            color +=albedo * envIntensity * (1.0 - roughness);
+    }
+    
+    if(isDirectLight == 1)
+        color += Lo;
+
 
     // Tone Correction
-    float luminance = dot(directLighting, vec3(0.2126, 0.7152, 0.0722));
+    float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
     float mappedLuminance = (luminance * (1.0 + luminance/(pureWhite*pureWhite))) / (1.0 + luminance);
 
     // Scale color by ratio of average luminances.
-    vec3 mappedColor = (mappedLuminance / luminance) * directLighting;
-    color = vec4(pow(mappedColor, vec3(1.0/gamma)), 1.0);
+    vec3 mappedColor = (mappedLuminance / luminance) * color;
+	Fragcolor = vec4(pow(mappedColor, vec3(1.0/gamma)), 1.0);
 
-    color = vec4(directLighting, 1.0);
-    color = vec4(0.2,0.3,0.5,1.0);
+    if(showNormal == 1){
+        Fragcolor = vec4(normal, 1.0);
+    }
+
+    // Fragcolor = vec4(specular, 1.0);
+    // Fragcolor = vec4(0.2,0.3,0.5,1.0);
+    // Fragcolor = vec4(albedo, 1.0);
+	// Fragcolor = vec4(lightDir,1.0);
+	// Fragcolor = vec4(shadow, 1.0, 1.0, 1.0);
+
 }
 

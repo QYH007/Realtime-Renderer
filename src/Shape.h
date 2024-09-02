@@ -22,6 +22,7 @@ namespace cgCourse
         std::shared_ptr<Texture> specTexture = nullptr;
         std::shared_ptr<Texture> metalnessTexture = nullptr;
         std::shared_ptr<Texture> roughnessTexture = nullptr;
+        std::shared_ptr<Texture> rampTexture = nullptr;
         bool hasObjectColor = false;
         glm::vec3 color = {0.5, 0.5, 0.5};
         float illumination = 0;

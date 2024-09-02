@@ -78,15 +78,13 @@ SSAO-Gun
 | ------------------------------------------------- |
 | ![1723796702561](images/README/1723796702561.png) |
 
-#### 4. NPR shading (outline only)
+#### 4. NPR shading
 
 ![1724659915892](images/README/1724659915892.png)
 
-![1724660059550](images/README/1724660059550.png)
+![1725274778983](images/README/1725274778983.png)
 
-![1724661167737](images/README/1724661167737.png)
-
-![1724660069619](images/README/1724660069619.png)
+![1725274787683](images/README/1725274787683.png)
 
 ![1724660982404](images/README/1724660982404.png)
 

@@ -39,6 +39,7 @@ uniform sampler2D normalTexture;
 uniform sampler2D specTexture;
 uniform sampler2D metalnessTexture;
 uniform sampler2D roughnessTexture;
+uniform sampler2D rampTexture;
 
 // IBL
 uniform samplerCube irradianceMap;
@@ -71,6 +72,7 @@ uniform int useAlbedoMap;
 uniform int useMetalnessMap;
 uniform int useRoughnessMap;
 uniform int useNormalMap;
+uniform int useRampMap;
 
 uniform int isIBL;
 
@@ -372,18 +374,31 @@ void main()
     vec2 brdf  = texture(brdfLUT, vec2(max(dot(normal, viewDirection), 0.0), roughness)).rg;
     specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
-    ambient = (kD * diffuse + specular) * envIntensity;
+    //ambient = (kD * diffuse + specular) * envIntensity;
+    ambient = albedo * envIntensity;
     
     
     vec3 F; 
     float shadow = 1.0;
     vec3 Lradiance;
 	// 对每一个光源做累加计算
+    vec3 rampColor;
     for (int i=0; i<NumLights; ++i)
     {
         posLightSpace = lightSpaceMatrixes[i] * vec4(worldPos, 1);
         lightDir = normalize(lights[i].position - worldPos);
         Lradiance = lights[i].radiance;
+
+        float dist = length(lights[i].position - worldPos);
+        float attenuation = 1.0 / (1.0 + 0.2 * dist * dist);
+
+
+        float diff = dot(normal, lightDir);
+        diff = (diff * 0.5 + 0.5) * attenuation;
+
+
+        rampColor = texture(rampTexture, vec2(diff, diff)).rgb;
+        vec3 diffuseTermramp = albedo*  rampColor * Lradiance;
 
         // Half-vector between Li and viewDirection.
         Lh = normalize(lightDir + viewDirection);
@@ -411,8 +426,8 @@ void main()
         kD *= 1.0 - metalness;
     
         vec3 specularTerm = D * G * F / (4.0 * NdotV * NdotL + EPS);
-        vec3 diffuseTerm = kD * albedo / PI ;
-
+        vec3 diffuseTerm = kD * albedo * rampColor / PI ;
+        
         // shadow mapping
 
         if(shadowtype == 1 ){
@@ -426,7 +441,8 @@ void main()
         }
 
 
-        Lo += (diffuseTerm + specularTerm) * Lradiance * NdotL * shadow;
+        //Lo += (diffuseTerm + specularTerm) * Lradiance * NdotL * shadow;
+        Lo += diffuseTermramp * shadow;
         // END TODO
     }
 
@@ -436,7 +452,7 @@ void main()
         if(isIBL == 1)
             color += ambient;
         else
-            color +=albedo * envIntensity * (1.0 - roughness);
+            color += albedo * envIntensity * (1.0 - roughness);
     }
     
     if(isDirectLight == 1)
@@ -455,7 +471,7 @@ void main()
         Fragcolor = vec4(normal, 1.0);
     }
 
-    // Fragcolor = vec4(specular, 1.0);
+    // Fragcolor = vec4(ambient, 1.0);
     // Fragcolor = vec4(0.2,0.3,0.5,1.0);
     // Fragcolor = vec4(albedo, 1.0);
 	// Fragcolor = vec4(lightDir,1.0);

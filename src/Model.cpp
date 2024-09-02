@@ -51,8 +51,10 @@ namespace cgCourse{
         std::vector<std::string> path2textures;
         for(int i =0; i < scene->mNumMaterials; i++){
             aiString path2texture;
-            //std::cout<<"material No."<<i<<"has"<<scene->mMaterials[i]->GetTextureCount(aiTextureType_DIFFUSE)<<"diffuse, "<<scene->mMaterials[i]->GetTextureCount(aiTextureType_UNKNOWN)<<"metal, "<<scene->mMaterials[i]->GetTextureCount(aiTextureType_DIFFUSE_ROUGHNESS)<<"normal,"<<std::endl;
+            //std::cout<<"material No."<<i<<"has"<<scene->mMaterials[i]->GetTextureCount(aiTextureType_DIFFUSE)<<"diffuse, "<<scene->mMaterials[i]->GetTextureCount(aiTextureType_UNKNOWN)<<"metal, "<<scene->mMaterials[i]->GetTextureCount()<<"normal,"<<std::endl;
+
             for(int j =0; j < scene->mMaterials[i]->GetTextureCount(aiTextureType_DIFFUSE); j++){
+                scene->mMaterials[i]->mNumProperties;
                 scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, j, &path2texture);
                 std::string s =  path2texture.data;
                 if(_file == "fufu.pmx"){
@@ -158,6 +160,22 @@ namespace cgCourse{
             element->getMaterial()->metalnessTexture = std::make_shared<Texture>();
 		    element->getMaterial()->roughnessTexture = std::make_shared<Texture>();
             element->getMaterial()->normalTexture = std::make_shared<Texture>();
+            element->getMaterial()->rampTexture = std::make_shared<Texture>();
+            std::string rampPath;
+            if(_file == "fufu.pmx"){
+                if(mesh->mMaterialIndex == 0)
+                    rampPath = _path + "skin.bmp";
+                else if(mesh->mMaterialIndex == 1)
+                    rampPath = _path + "hair.bmp";
+                else if(mesh->mMaterialIndex == 2)
+                    rampPath = _path + "hair.bmp";
+                else
+                    rampPath = _path + "toon_defo.bmp";
+            }
+            else 
+                rampPath = std::string(RES_DIR) + "/toon_defo.bmp";
+
+            element->getMaterial()->rampTexture->loadFromFile(rampPath, true);
 
             elements.push_back(element);
         }

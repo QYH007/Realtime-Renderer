@@ -170,6 +170,7 @@ namespace cgCourse
         bool useMetalnessMap = 0;
         bool useRoughnessMap = 0;
         bool useNormalMap = 0;
+        bool useRampMap = 0;
         material = getMaterial();
         if (material != nullptr){
             if (material->diffuseTexture && material->diffuseTexture->getTexHandle() != GLuint(0)){
@@ -190,6 +191,10 @@ namespace cgCourse
             if (material->roughnessTexture && material->roughnessTexture->getTexHandle() != GLuint(0)){
                 _shaderProgram->addTexture("roughnessTexture", material->roughnessTexture->getTexHandle());
                 useRoughnessMap = 1;
+            }
+            if (material->rampTexture && material->rampTexture->getTexHandle() != GLuint(0)){
+                _shaderProgram->addTexture("rampTexture", material->rampTexture->getTexHandle());
+                useRampMap = 1;
             }
         }
 
@@ -213,12 +218,16 @@ namespace cgCourse
                 _shaderProgram->addTexture("roughnessTexture", _overrideMaterial->roughnessTexture->getTexHandle());
                 useRoughnessMap = 1;
             }
+            if (_overrideMaterial->rampTexture && _overrideMaterial->rampTexture->getTexHandle() != GLuint(0)){
+                _shaderProgram->addTexture("rampTexture", _overrideMaterial->rampTexture->getTexHandle());
+                useRampMap = 1;
+            }
         }
         _shaderProgram->setUniformi("useAlbedoMap", useAlbedoMap);
         _shaderProgram->setUniformi("useMetalnessMap", useMetalnessMap);
         _shaderProgram->setUniformi("useRoughnessMap", useRoughnessMap);
         _shaderProgram->setUniformi("useNormalMap", useNormalMap);
-        
+        _shaderProgram->setUniformi("useRampMap", useNormalMap);
         
 		// 
 		_shaderProgram->bind();

@@ -707,7 +707,7 @@ namespace cgCourse
 		// ========================octopus=============
 		octopus.load(std::string(RES_DIR) + "/fufu/", "octopus.pmx", false, false, false);
 		octopus.setScaling(glm::vec3(0.2, 0.2, 0.2));
-        octopus.setPosition(glm::vec3(4, 3, -2));
+        octopus.setPosition(glm::vec3(4, 0, -2));
 		octopus.setRotation(180, glm::vec3(0, 1, 0));
 
 		float aspect_ratio = float(_windowSize.y) / _windowSize.x;
@@ -724,7 +724,7 @@ namespace cgCourse
 		light.specularTerm = {1, 1, 1};
 
 		lights.push_back(LightInfo());
-        lights.back().radiance = glm::vec3(0.7, 0.7, 0.7);
+        lights.back().radiance = glm::vec3(0.1, 0.1, 0.1);
         lights.back().position = glm::vec3(0.0, 3.0, -2.0);
 
 		lightboxes.push_back(std::make_shared<Cube>());

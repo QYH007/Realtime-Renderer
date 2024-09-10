@@ -77,7 +77,9 @@ namespace cgCourse
 		programForPBR			= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/PBR");
 		programForSkybox 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Skybox");
 		programForDefer 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Defer");
+		programForDeferTAA 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/DeferTAA");
 		programForDeferLighting = std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/DeferLighting");
+		programForTAA			= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/TAA");
 		programForSSAO 			= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAO");
 		programForSSAOBlur 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/SSAOBlur");
 		programForHDR2Cubemap 	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/HDR2Cube");
@@ -86,6 +88,8 @@ namespace cgCourse
 		programForLUTGen 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/LUTGen");
 		programForOutline 		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Outline");
 		programForCartoon		= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/Cartoon");
+		programForFullScreen	= std::make_shared<ShaderProgram>(std::string(SHADER_DIR) + "/FullScreen");
+
 		
 		programForSAT 			= std::make_shared<ComputingShaderProgram>(std::string(SHADER_DIR) + "/ComputeSAT");
 		programForSAT->bind();
@@ -102,9 +106,16 @@ namespace cgCourse
 	bool GLExample::update()
 	{
 		//gun.setRotation(0.1, glm::vec3(0, 0, 1.0f));
+		// TAA info 
+		fufu.preModelMatrix = fufu.getModelMatrix();
+		gun.preModelMatrix = gun.getModelMatrix();
+		taaInfo.preProjection = cam.getProjectionMatrix();
+		taaInfo.preView = cam.getViewMatrix();
+
 		fufu.setPosition(fufu.objectPosition);
 		gun.setPosition(gun.objectPosition);
 		cube->setPosition(cube->objectPosition);
+
 		if(animationDir == Forward)
 		{
 			if(animation > 2.0)
@@ -169,9 +180,16 @@ namespace cgCourse
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT3, GL_TEXTURE_2D, gRough, 0);
 
+		glGenTextures(1, &gVelo);
+		glBindTexture(GL_TEXTURE_2D, gVelo);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT4, GL_TEXTURE_2D, gVelo, 0);
+
 		// tell OpenGL which color attachments we'll use (of this framebuffer) for rendering 
-		unsigned int attachments[4] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3 };
-		glDrawBuffers(4, attachments);
+		unsigned int attachments[5] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4 };
+		glDrawBuffers(5, attachments);
 
 		// create and attach depth buffer (renderbuffer)
 		unsigned int rboDepth;
@@ -186,7 +204,9 @@ namespace cgCourse
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		// Also create framebuffer to hold SSAO processing stage 
-		glGenFramebuffers(1, &ssaoFBO);  glGenFramebuffers(1, &ssaoBlurFBO);
+		glGenFramebuffers(1, &ssaoFBO);  
+		glGenFramebuffers(1, &ssaoBlurFBO);
+
 		glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
 		// - SSAO color buffer
 		glGenTextures(1, &ssaoColorBuffer);
@@ -239,9 +259,51 @@ namespace cgCourse
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
+		// TAA init
+		// - TAA curent color buffer
+		glGenFramebuffers(1, &taaInfo.currentColorFBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, taaInfo.currentColorFBO);
+
+		glGenTextures(1, &taaInfo.currentColor);
+		glBindTexture(GL_TEXTURE_2D, taaInfo.currentColor);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, taaInfo.currentColor, 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "TAA Framebuffer not complete!" << std::endl;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		// -TAA final blended color buffer
+		glGenFramebuffers(1, &taaInfo.finalColorFBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, taaInfo.finalColorFBO);
+
+		glGenTextures(1, &taaInfo.finalColor);
+		glBindTexture(GL_TEXTURE_2D, taaInfo.finalColor);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, taaInfo.finalColor, 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			std::cout << "TAA Framebuffer not complete!" << std::endl;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		glGenTextures(1, &taaInfo.previousColor);
+		glBindTexture(GL_TEXTURE_2D, taaInfo.previousColor);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _windowSize.x, _windowSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 	}
 
-	void GLExample::deferredRender(){
+	void GLExample::deferredRender(const std::shared_ptr<ShaderProgram>& _program){
 
 			// 1. geometry pass: render scene's geometry/color data into gbuffer
 			// -----------------------------------------------------------------
@@ -254,14 +316,16 @@ namespace cgCourse
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_BACK);
 
-			programForDefer->setUniformi("useDiffuseTexture", 1);
-			programForDefer->setUniformf("near", cam.NearPlane);
-			programForDefer->setUniformf("far", cam.FarPlane);
-			programForDefer->setUniformi("useDiffuseTexture", 1);
-			programForDefer->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
-			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForDefer);
-			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), programForDefer);
-			renderGround(programForDefer);
+			_program->setUniformi("useDiffuseTexture", 1);
+			_program->setUniformf("near", cam.NearPlane);
+			_program->setUniformf("far", cam.FarPlane);
+			_program->setUniformi("useDiffuseTexture", 1);
+
+
+			_program->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), _program);
+			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), _program);
+			renderGround(_program);
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 			// 2.SSAO
@@ -335,6 +399,7 @@ namespace cgCourse
 			programForDeferLighting->bind();
 			renderQuad();
 			programForDeferLighting->unbind();
+
 			glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
 			// blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
@@ -350,7 +415,192 @@ namespace cgCourse
 			// renderPlane(gAlbedoSpec);
 	}
 
-	
+	void GLExample::deferredRenderTAA(const std::shared_ptr<ShaderProgram>& _program){
+
+		// 1. geometry pass: render scene's geometry/color data into gbuffer
+			// -----------------------------------------------------------------
+			glEnable(GL_DEPTH_TEST);
+			glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
+			glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+			glViewport(0, 0, getFramebufferSize().x, getFramebufferSize().y) ;
+			glEnable(GL_CULL_FACE);
+			glCullFace(GL_BACK);
+
+			_program->setUniformi("useDiffuseTexture", 1);
+			_program->setUniformf("near", cam.NearPlane);
+			_program->setUniformf("far", cam.FarPlane);
+			_program->setUniformi("useDiffuseTexture", 1);
+
+			_program->setUniformi("screenWidth", _windowSize.x);
+			_program->setUniformi("screenHeight", _windowSize.y);
+
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_int_distribution<int> distrib(0, 7);
+			int random_number = distrib(gen);
+			_program->setUniformi("offsetIdx", random_number);
+
+			// preInfo loading
+			_program->setUniformMat4fv("preProjectionMatrix", taaInfo.preProjection);
+			_program->setUniformMat4fv("preViewMatrix", taaInfo.preView);
+
+			fufu.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), _program);
+			gun.draw(cam.getProjectionMatrix(), cam.getViewMatrix(), _program);
+			renderGround(_program);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// 2.SSAO
+			glBindFramebuffer(GL_FRAMEBUFFER, ssaoFBO);
+            glClear(GL_COLOR_BUFFER_BIT);
+			programForSSAO->addTexture("gPosition", gPosition);
+			programForSSAO->addTexture("gNormal", gNormal);
+			programForSSAO->addTexture("texNoise", noiseTexture);
+
+            // // Send kernel + rotation 
+            for (GLuint i = 0; i < 64; ++i)
+				programForSSAO->setUniform3fv(("samples[" + std::to_string(i) + "]").c_str(), ssaoKernel[i]);
+			programForSSAO->setUniformMat4fv("projection", cam.getProjectionMatrix());
+			// programForSSAO->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			programForSSAO->setUniformf("SSAOradius", SSAOradius);
+            programForSSAO->bind();
+			renderQuad();
+			programForSSAO->unbind();
+
+        	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// 3.SSAO blurring
+			glBindFramebuffer(GL_FRAMEBUFFER, ssaoBlurFBO);
+            glClear(GL_COLOR_BUFFER_BIT);
+            programForSSAOBlur->addTexture("ssaoMap", ssaoColorBuffer);
+			programForSSAOBlur->setUniformi("blurSize", SSAOblurSize);
+			programForSSAOBlur->bind();
+            renderQuad();
+			programForSSAOBlur->unbind();
+        	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// 4. lighting pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
+			// -----------------------------------------------------------------------------------------------------------------------
+			glBindFramebuffer(GL_FRAMEBUFFER, taaInfo.currentColorFBO);
+			glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+			programForDeferLighting->addTexture("gPosition", gPosition);
+			programForDeferLighting->addTexture("gNormal", gNormal);
+			programForDeferLighting->addTexture("gAlbedoSpec", gAlbedoSpec);
+			programForDeferLighting->addTexture("gRough", gRough);
+			programForDeferLighting->addTexture("ssao", ssaoColorBufferBlur);
+
+			// send light relevant uniforms
+			programForDeferLighting->setUniformf("manyLightIntensity", manyLightIntensity);
+			for (unsigned int i = 0; i < manyLightsPositions.size(); i++)
+			{
+				const float constant = 1.0f; // note that we don't send this to the shader, we assume it is always 1.0 (in our case)
+				const float linear = 0.7f;
+				const float quadratic = 1.8f;
+				programForDeferLighting->setUniform3fv("lights[" + std::to_string(i) + "].Position", manyLightsPositions[i] + manyLightPosition);
+				programForDeferLighting->setUniform3fv("lights[" + std::to_string(i) + "].Color", manyLightsColors[i]);
+				// update attenuation parameters and calculate radius
+				programForDeferLighting->setUniformf("lights[" + std::to_string(i) + "].Linear", linear);
+				programForDeferLighting->setUniformf("lights[" + std::to_string(i) + "].Quadratic", quadratic);
+				
+				// then calculate radius of light volume/sphere
+				const float maxBrightness = std::fmaxf(std::fmaxf(manyLightsColors[i].r, manyLightsColors[i].g), manyLightsColors[i].b);
+				float radius = (-linear + std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0f / 5.0f) * maxBrightness))) / (2.0f * quadratic);
+				programForDeferLighting->setUniformf("lights[" + std::to_string(i) + "].Radius", radius);
+			}
+			
+			programForDeferLighting->setUniform3fv("viewPos", cam.getPosition());
+			programForDeferLighting->setUniformMat4fv("viewMatrix", cam.getViewMatrix());
+			programForDeferLighting->setUniformi("useDiffuseTexture", 1);
+			programForDeferLighting->setUniformi("showDiffuseTerm", showDiffuseTerm);
+			programForDeferLighting->setUniformi("showSpecular", showSpecular);
+			programForDeferLighting->setUniformi("showColor", showColor);
+			programForDeferLighting->setUniformi("outputMood", deferRenderOutput);
+			programForDeferLighting->addCubeMap("irradianceMap", irradianceCubemap->getTexHandle());
+			programForDeferLighting->setUniformi("isIBL", isIBL);
+			// finally render quad
+			programForDeferLighting->bind();
+			renderQuad();
+			programForDeferLighting->unbind();
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+			// 5. TAA pass, blend current frame to pre frame.
+			glBindFramebuffer(GL_FRAMEBUFFER, taaInfo.finalColorFBO);
+			glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+
+			// layout(binding=0) uniform sampler2D currentColor;
+			// layout(binding=1) uniform sampler2D previousColor;
+			// layout(binding=2) uniform sampler2D velocityTexture;
+			// layout(binding=3) uniform sampler2D currentDepth;
+			if(firstRender){
+				// copy new colorFBO
+				glBindFramebuffer(GL_FRAMEBUFFER, taaInfo.currentColorFBO);
+
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, taaInfo.previousColor);
+				glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, _windowSize.x, _windowSize.y);
+				glBindTexture(GL_TEXTURE_2D, 0);
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
+				firstRender = 0;
+			}
+
+			programForTAA->addTexture("currentColor", taaInfo.currentColor);
+			programForTAA->addTexture("previousColor", taaInfo.previousColor);
+			programForTAA->addTexture("velocityTexture", gVelo);
+			programForTAA->addTexture("currentDepth", gPosition);
+			programForTAA->setUniformi("ScreenWidth", _windowSize.x);
+			programForTAA->setUniformi("ScreenHeight", _windowSize.y);
+			programForTAA->setUniformi("frameCount", taaInfo.frameCount);
+
+			// finally render quad
+			programForTAA->bind();
+			renderQuad();
+			programForTAA->unbind();
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			// copy new colorFBO
+			glBindFramebuffer(GL_FRAMEBUFFER, taaInfo.finalColorFBO);
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, taaInfo.previousColor);
+			glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, _windowSize.x, _windowSize.y);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+			// 6. render final sceen to screen
+			programForFullScreen->bind();
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, taaInfo.finalColor);
+			glUniform1i(programForFullScreen->getUniformLocation("screenTexture"), 0);
+			renderQuad();
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			programForFullScreen->unbind();
+
+			glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
+			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
+			// blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
+			// the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the 		
+			// depth buffer in another shader stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
+			glBlitFramebuffer(0, 0, _windowSize.x, _windowSize.y, 0, 0,_windowSize.x, _windowSize.y, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
+
+			renderLightBox(true);
+
+			renderPlane(gVelo);
+			// renderPlane(gRough);
+			// renderPlane(gAlbedoSpec);
+		
+	}
+		
+
 	void GLExample::renderQuad(){
 		if (quadVAO == 0)
 		{
@@ -453,10 +703,17 @@ namespace cgCourse
 		lastFrame = currentFrame;
 
 		update();
+
 		cam.updateCameraData();
 
-		if(isDefer)
-			deferredRender();
+		if(isDefer){
+			if(isTAA){
+				deferredRenderTAA(programForDeferTAA);
+			}else{
+				deferredRender(programForDefer);
+			}
+		}
+			
 		else
 			forwardRender();
 		
@@ -651,6 +908,12 @@ namespace cgCourse
 		ground->setPosition(glm::vec3(0, -10, 0));
 		ground->setScaling(glm::vec3(30, 0.01, 30));
 
+		wall = std::make_shared<Cube>();
+		if(!wall->createVertexArray(0, 1, 2, 3, 4))
+			return false;
+		wall->setPosition(glm::vec3(0, 0, 20));
+		wall->setScaling(glm::vec3(30, 0.01, 30));
+		wall->setRotation(-90, glm::vec3(1, 0, 0));
 
 		cube = std::make_shared<Cube>();
 		if(!cube->createVertexArray(0, 1, 2, 3, 4))
@@ -887,6 +1150,8 @@ namespace cgCourse
 				ImGui::SliderFloat("SSAORadius", &SSAOradius, 0.1f, 3.0f, "%.2f");
 				ImGui::Text("SSAOblurSize:");
 				ImGui::SliderInt("SSAOblurSize", &SSAOblurSize, 0, 6);
+
+				ImGui::Checkbox("TAA", &isTAA);
 				
 				ImGui::End();
 			}
@@ -999,6 +1264,8 @@ namespace cgCourse
 		// torus -> draw();
 		glUniformMatrix4fv(programForShadows->getUniformLocation("modelMatrix"), 1, GL_FALSE, &ground->getModelMatrix()[0][0]);
 		ground -> draw();
+		glUniformMatrix4fv(programForShadows->getUniformLocation("modelMatrix"), 1, GL_FALSE, &wall->getModelMatrix()[0][0]);
+		wall -> draw();
 		glUniformMatrix4fv(programForShadows->getUniformLocation("modelMatrix"), 1, GL_FALSE, &gun.getModelMatrix()[0][0]);
 		gun.draw();
 		glUniformMatrix4fv(programForShadows->getUniformLocation("modelMatrix"), 1, GL_FALSE, &fufu.getModelMatrix()[0][0]);
@@ -1109,8 +1376,12 @@ namespace cgCourse
 			program->setUniformMat4fv("mvpMatrix", mvpMatrix);
        		program->setUniformMat4fv("modelMatrix", ground->getModelMatrix());
 			program->setUniformi("useDiffuseTexture", 0);
-
 			ground->draw(cam.getProjectionMatrix(), cam.getViewMatrix(), program, false, nullptr);
+
+			mvpMatrix = cam.getViewProjectionMatrix() * wall->getModelMatrix();
+			program->setUniformMat4fv("modelMatrix", wall->getModelMatrix());
+			program->setUniformMat4fv("mvpMatrix", mvpMatrix);
+			wall->draw(cam.getProjectionMatrix(), cam.getViewMatrix(), program, false, nullptr);
 	}
 
 	void GLExample::renderCubes(const std::vector<glm::mat4> & lightSpaceMatrixes)

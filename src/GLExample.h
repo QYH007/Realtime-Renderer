@@ -46,6 +46,31 @@ namespace cgCourse
 		unsigned int varianceTexture[2];
 	};
 
+	struct TAAInfo
+	{
+		// buffers
+		GLuint currentColorFBO;
+		GLuint currentColor;
+
+		GLuint previousColor;
+
+		GLuint velocityFBO;
+		GLuint velocityTexture;
+
+		GLuint finalColorFBO;
+		GLuint finalColor;
+
+		GLuint currentDepth;
+
+		int frameCount = 5;
+
+		// uniforms
+		glm::mat4 preProjection;
+		glm::mat4 preView;
+		glm::mat4 preModel;
+
+	};
+
 	class GLExample : public GLApp
 	{
 	public:
@@ -59,7 +84,8 @@ namespace cgCourse
 		bool init() override;
 		bool update() override;
 		bool render() override;
-		void deferredRender();
+		void deferredRender(const std::shared_ptr<ShaderProgram>& _program);
+		void deferredRenderTAA(const std::shared_ptr<ShaderProgram>& _program);
 		void forwardRender();
 		bool testrender();
 		bool end() override;
@@ -100,8 +126,11 @@ namespace cgCourse
 		std::shared_ptr<ShaderProgram> programForLightBox;
 		std::shared_ptr<ShaderProgram> programForPBR;
 		std::shared_ptr<ShaderProgram> programForDefer;
+		std::shared_ptr<ShaderProgram> programForDeferTAA;
 		std::shared_ptr<ShaderProgram> programForSkybox;
 		std::shared_ptr<ShaderProgram> programForDeferLighting;
+		std::shared_ptr<ShaderProgram> programForTAA;
+		std::shared_ptr<ShaderProgram> programForFullScreen;
 		std::shared_ptr<ShaderProgram> programForSSAO;
 		std::shared_ptr<ShaderProgram> programForSSAOBlur;
 		std::shared_ptr<ShaderProgram> programForHDR2Cubemap;
@@ -117,6 +146,7 @@ namespace cgCourse
 		std::shared_ptr<Cube> lightbox;
 		std::shared_ptr<Torus> torus;
 		std::shared_ptr<Cube> ground;
+		std::shared_ptr<Cube> wall;
 		
 		Model gun;
 		Model fufu;
@@ -154,8 +184,9 @@ namespace cgCourse
 		float deltaTime = 0.0f;
 
 		unsigned int gBuffer;
-		unsigned int gPosition, gNormal, gAlbedoSpec, gRough;
+		unsigned int gPosition, gNormal, gAlbedoSpec, gRough, gVelo;
 		unsigned int quadVAO = 0, quadVBO;
+		unsigned int firstRender = 1;
 
 		unsigned int brdfLUTTexture;
 
@@ -166,6 +197,7 @@ namespace cgCourse
 
 		bool isCartoon = false;
 		bool isDefer = false;
+		bool isTAA = true;
 		bool isIBL = true;
 		bool drawTorusNormals = false;
 		bool disPlay_shadowMap = true;
@@ -181,6 +213,7 @@ namespace cgCourse
 		std::vector<LightInfo> lights;
 		std::vector<std::shared_ptr<Cube>> lightboxes;
 		std::vector<ShadowMapping> shadows;
+		TAAInfo taaInfo;
 
 		const unsigned int MANY_LIGHT_NUM = 32;
 		float manyLightRadius = 12.0f;

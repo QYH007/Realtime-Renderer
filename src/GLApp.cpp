@@ -64,7 +64,7 @@ namespace cgCourse
 
 		glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 		glfwWindowHint(GLFW_RESIZABLE, _resizeable ? GLFW_TRUE : GLFW_FALSE);
-		glfwWindowHint(GLFW_SAMPLES,4);
+		//glfwWindowHint(GLFW_SAMPLES,4);
 
 		// Window and OpenGL context creation
 		window_ = glfwCreateWindow(int(_windowSize.x), int(_windowSize.y), title.c_str(), NULL, NULL);
@@ -115,7 +115,7 @@ namespace cgCourse
 			return false;
 
 		// Render loop: process input handlers and call custom rendering
-		glEnable(GL_MULTISAMPLE);
+		// glEnable(GL_MULTISAMPLE);
 		while(!glfwWindowShouldClose(window_))
 		{
 			glfwPollEvents();

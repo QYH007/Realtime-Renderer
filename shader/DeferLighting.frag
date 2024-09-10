@@ -187,10 +187,21 @@ void main()
 
 
                 directLighting += (diffuseTerm + specularTerm) * lights[i].Color * manyLightIntensity * NdotL;
+                
             }
         }
 
-        FragColor = vec4(directLighting, 1.0);
+        // Tone Correction
+        float luminance = dot(directLighting, vec3(0.2126, 0.7152, 0.0722));
+        float mappedLuminance = (luminance * (1.0 + luminance/(pureWhite*pureWhite))) / (1.0 + luminance);
+
+        // Scale color by ratio of average luminances.
+        vec3 mappedColor = (mappedLuminance / luminance) * directLighting;
+
+        FragColor = vec4(pow(mappedColor, vec3(1.0/gamma)), 1.0);
+
+        //FragColor = vec4(directLighting, 1.0);
+
         //FragColor = vec4(metalness, metalness, metalness, 1.0);
     } 
     

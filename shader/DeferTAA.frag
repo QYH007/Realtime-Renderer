@@ -3,11 +3,15 @@ layout (location = 0) out vec4 gPosition;
 layout (location = 1) out vec3 gNormal;
 layout (location = 2) out vec4 gAlbedoSpec;
 layout (location = 3) out vec4 gRough;
+layout (location = 4) out vec4 gVelo;
 
 in vec2 TexCoords;
 in vec3 viewPos;
 in vec3 viewObjectNormal;
 in mat3 tbn;
+
+in vec4 preScreenPosition;
+in vec4 nowScreenPosition;
 
 uniform sampler2D diffuseTexture;
 uniform sampler2D normalTexture;
@@ -71,4 +75,10 @@ void main()
 
     // store roughness
     gRough.r = roughness;
+
+    // velocity
+    vec2 newPos = ((nowScreenPosition.xy / nowScreenPosition.w) * 0.5 + 0.5);
+    vec2 prePos = ((preScreenPosition.xy / preScreenPosition.w) * 0.5 + 0.5);
+
+    gVelo = vec4(newPos - prePos, 0.0, 0.0);
 }

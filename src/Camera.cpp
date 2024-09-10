@@ -116,6 +116,10 @@ namespace cgCourse
 	void Camera::computeProjectionMatrix(const glm::uvec2 & _extent)
 	{
 		projectionMatrix = glm::perspective(glm::radians(Fov), AspectRatio, NearPlane, FarPlane);
+		// std::cout<<projectionMatrix[0][0]<<","<<projectionMatrix[0][1]<<","<<projectionMatrix[0][2]<<","<<projectionMatrix[0][3]<<std::endl;
+		// std::cout<<projectionMatrix[1][0]<<","<<projectionMatrix[1][1]<<","<<projectionMatrix[1][2]<<","<<projectionMatrix[1][3]<<std::endl;
+		// std::cout<<projectionMatrix[2][0]<<","<<projectionMatrix[2][1]<<","<<projectionMatrix[2][2]<<","<<projectionMatrix[2][3]<<std::endl;
+		// std::cout<<projectionMatrix[3][0]<<","<<projectionMatrix[3][1]<<","<<projectionMatrix[3][2]<<","<<projectionMatrix[3][3]<<std::endl;
 	}
 
 	const glm::vec3 & Camera::getPosition() const

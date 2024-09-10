@@ -195,10 +195,14 @@ namespace cgCourse{
             _shaderProgram->setUniformMat4fv("viewMatrix", _viewMatrix);
             _shaderProgram->setUniformMat4fv("modelMatrix", getModelMatrix());
             _shaderProgram->setUniformMat4fv("projectionMatrix", _projectionMatrix);
+            
+            // TAA info
+            _shaderProgram->setUniformMat4fv("preModelMatrix", preModelMatrix);
 
             for (auto &e:elements){
                 e->draw(_projectionMatrix, _viewMatrix, _shaderProgram, false, getMaterial());
             }
-        }
+    }
+    
     
 }

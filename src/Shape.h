@@ -94,6 +94,7 @@ namespace cgCourse
         void calculateModelMatrix();
         
         glm::vec3 objectPosition;
+        glm::mat4 preModelMatrix = glm::mat4(1); // for TAA
 
     protected:
         // ------------------------------- Drawable part --------------------------------------
@@ -106,6 +107,7 @@ namespace cgCourse
         glm::mat4 translationMatrix = glm::mat4(1);
         glm::mat4 scalingMatrix = glm::mat4(1);
         glm::mat4 modelMatrix = glm::mat4(1); // Identity matrix
+
 
         std::vector<glm::vec3> positions;
         std::vector<glm::vec3> colors;

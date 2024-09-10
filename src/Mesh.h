@@ -27,7 +27,6 @@ namespace cgCourse
         const glm::mat4& getModelMatrix() const ;
         virtual GLsizei getDrawElemCount() const ;
         const std::vector< glm::uvec2>& getLineIndices() const ;
-    
     };
     
     
